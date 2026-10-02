@@ -1,0 +1,1531 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Мектепке дайын</title>
+<meta name="description" content="Мектепке дайын — игровая подготовка к 1 классу: счёт, буквы, страны мира. Қазақша, русский, English.">
+<meta name="theme-color" content="#bfe6ff">
+<meta name="color-scheme" content="light">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Мектепке дайын">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Rubik:wght@500;700;800&display=swap">
+<style>
+:root{
+  --ink:#24324f; --muted:#5f6f8f;
+  --coral:#ff7a66; --coral-d:#df5641;
+  --violet:#8f6cf0; --violet-d:#6a47cf;
+  --teal:#1fbfae; --teal-d:#11968a;
+  --sun:#ffc531; --sun-d:#e09c00;
+  --green:#35c16a; --green-d:#21974e;
+  --red:#ff6b6b; --red-d:#d94848;
+  --line:#d3def2;
+  --r:22px;
+  --shadow:0 8px 24px rgba(36,50,79,.10);
+  --head:'Rubik',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --body:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --emoji:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:#bfe6ff}
+body{
+  margin:0;min-height:100vh;min-height:100dvh;
+  font-family:var(--body);font-weight:700;color:var(--ink);line-height:1.35;
+  background:linear-gradient(180deg,#aadcff 0%,#d6efff 45%,#eef9ff 100%);
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
+  -webkit-tap-highlight-color:transparent;overscroll-behavior-y:none;
+}
+h1,h2,h3,.rubik,.num,.letter{font-family:var(--head)}
+h1{font-size:30px;margin:0;font-weight:800;line-height:1.15}
+h2{font-size:21px;margin:0 0 12px;font-weight:800}
+p{margin:0}
+.emoji{font-family:var(--emoji);font-weight:400}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;margin:0;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+button:disabled{cursor:default}
+:focus{outline:none}
+:focus-visible{outline:4px solid #1d6fe0;outline-offset:3px}
+[hidden]{display:none!important}
+
+/* ---------- Шапка ---------- */
+.topwrap{position:sticky;top:0;z-index:20}
+.top{
+  display:flex;align-items:center;gap:8px;
+  padding:calc(8px + env(safe-area-inset-top)) calc(14px + env(safe-area-inset-right)) 8px calc(14px + env(safe-area-inset-left));
+  background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+.brand{display:flex;align-items:center;gap:8px;font-family:var(--head);font-weight:800;font-size:20px;min-height:44px}
+.brand svg{width:40px;height:40px;flex:none}
+.spacer{flex:1}
+.pill{background:#eef4ff;border-radius:999px;padding:7px 12px;font-size:15px;white-space:nowrap}
+.stars{display:flex;align-items:center;gap:4px;background:#fff6d6;border:2px solid #ffd970;border-radius:999px;padding:4px 11px;font-family:var(--head);font-weight:800;font-size:19px;white-space:nowrap}
+.stars .st{color:#f5a100}
+.stars.bump{animation:bump .5s}
+.langs{display:flex;background:#eef4ff;border-radius:14px;padding:3px;flex:none}
+.langs button{padding:0 8px;border-radius:11px;font-size:15px;min-width:42px;min-height:40px}
+.langs button[aria-pressed="true"]{background:#fff;box-shadow:0 2px 0 var(--line)}
+.iconbtn{width:44px;height:44px;border-radius:14px;background:#eef4ff;font-size:22px;display:grid;place-items:center;flex:none}
+.ornament{
+  height:16px;background-color:#ffd45c;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='16' viewBox='0 0 48 16'%3E%3Cpath d='M24 15V10C24 5 18 3 15 6C13 8 14.5 11 17 10.5M24 10C24 5 30 3 33 6C35 8 33.5 11 31 10.5M0 15H48' fill='none' stroke='%23d98a00' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:repeat-x;background-size:48px 16px;
+  box-shadow:0 4px 10px rgba(36,50,79,.08);
+}
+
+/* ---------- Каркас ---------- */
+.wrap{max-width:960px;margin:0 auto;padding:18px calc(16px + env(safe-area-inset-right)) calc(36px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left))}
+.card{background:#fff;border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
+.muted{color:var(--muted);font-weight:600}
+
+/* «Объёмные» кнопки */
+.btn3d{
+  position:relative;border-radius:var(--r);background:#fff;
+  box-shadow:0 6px 0 var(--edge,var(--line)),0 10px 18px rgba(36,50,79,.10);
+  transition:transform .08s ease,box-shadow .08s ease;
+}
+.btn3d:active:not(:disabled){transform:translateY(4px);box-shadow:0 2px 0 var(--edge,var(--line)),0 4px 8px rgba(36,50,79,.10)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 22px;font-size:19px;font-weight:800}
+.primary{background:var(--sun);--edge:var(--sun-d)}
+.danger{background:var(--red);--edge:var(--red-d);color:#fff}
+.green{background:var(--green);--edge:var(--green-d);color:#fff}
+
+/* ---------- Главная ---------- */
+.hello{display:flex;align-items:center;gap:12px;margin:4px 0 18px}
+.hello svg{width:58px;height:58px;flex:none;animation:spin 30s linear infinite}
+.notes{display:grid;gap:10px;margin-bottom:18px}
+.notes:empty{display:none}
+.note{display:flex;gap:10px;align-items:center;background:#fff8e1;border:2px solid #ffd970;border-radius:18px;padding:10px 10px 10px 14px;font-size:15px;font-weight:700}
+.note .emoji{font-size:26px}
+.note div{flex:1}
+.note .x{width:40px;height:40px;border-radius:12px;font-size:18px;flex:none;color:var(--muted)}
+.note .btn{min-height:44px;padding:0 14px;font-size:16px;border-radius:14px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:22px}
+.tile{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:20px;min-height:190px;color:#fff;text-align:left}
+.tile.math{background:var(--coral);--edge:var(--coral-d)}
+.tile.abc{background:var(--violet);--edge:var(--violet-d)}
+.tile.world{background:var(--teal);--edge:var(--teal-d)}
+.tico{font-size:46px;line-height:1;font-weight:800}
+.tname{font-family:var(--head);font-size:26px;font-weight:800;flex:1}
+.bar{display:block;width:100%;height:12px;border-radius:99px;background:rgba(255,255,255,.35);overflow:hidden}
+.bar>i{display:block;height:100%;border-radius:99px;background:#fff;min-width:6px}
+.bar.light{background:#e8eef9;height:10px;margin-top:6px}
+.bar.light.math>i{background:var(--coral)}
+.bar.light.abc>i{background:var(--violet)}
+.bar.light.world>i{background:var(--teal)}
+.bar.light.stars>i{background:var(--sun)}
+.levelcard{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;margin-bottom:18px}
+.lvnum{width:84px;height:84px;border-radius:50%;background:var(--sun);display:grid;place-items:center;font-family:var(--head);font-weight:800;font-size:38px;color:#7a4a00;box-shadow:0 5px 0 var(--sun-d)}
+.lvtext h2{margin:0 0 2px}
+.medals{grid-column:1/-1;display:flex;gap:8px;overflow-x:auto;padding:4px 2px 2px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.medals::-webkit-scrollbar{display:none}
+.medal{width:48px;height:60px;flex:none}
+.plink{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:60px;font-size:19px;font-weight:800}
+
+/* ---------- Меню раздела ---------- */
+.sechead{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.backbtn{width:54px;height:54px;border-radius:16px;font-size:26px;font-weight:800;flex:none;display:grid;place-items:center}
+.math-c{color:var(--coral-d)} .abc-c{color:var(--violet-d)} .world-c{color:var(--teal-d)}
+.games{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:18px}
+.gtile{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 10px;min-height:150px;font-size:19px;font-weight:800;text-align:center}
+.gico{width:70px;height:70px;border-radius:22px;display:grid;place-items:center;font-size:38px;color:#fff;font-family:var(--emoji)}
+.gico b{font-family:var(--head);font-size:32px}
+.gico.math{background:#ffe3dd}.gico.abc{background:#ebe4ff}.gico.world{background:#d6f5f1}
+.gico.math b{color:var(--coral-d)}.gico.abc b{color:var(--violet-d)}.gico.world b{color:var(--teal-d)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;background:#fff;border-radius:20px;padding:6px;margin-bottom:18px;box-shadow:var(--shadow)}
+.segbtn{min-height:60px;border-radius:15px;font-size:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15;padding:4px}
+.segbtn b{font-size:22px}
+.segbtn small{color:var(--muted);font-weight:700}
+.segbtn[aria-pressed="true"]{background:var(--violet);color:#fff}
+.segbtn[aria-pressed="true"] small{color:#e9e2ff}
+.info{background:#fff;border-radius:18px;padding:12px 16px;margin-bottom:18px;font-size:16px;box-shadow:var(--shadow)}
+
+/* ---------- Раунд ---------- */
+.playtop{display:flex;align-items:center;gap:12px}
+.dots{display:flex;gap:8px;flex:1;justify-content:center;flex-wrap:wrap}
+.dots i{width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 2px #b9c9e6;transition:transform .2s}
+.dots i.done{background:var(--green);box-shadow:none}
+.dots i.cur{background:var(--sun);box-shadow:none;transform:scale(1.3)}
+.roundstars{font-family:var(--head);font-weight:800;font-size:19px;background:#fff;border-radius:999px;padding:6px 12px;white-space:nowrap}
+.roundstars .st{color:#f5a100}
+.ask{display:flex;align-items:center;gap:14px;margin:16px 0}
+.speak{width:58px;height:58px;border-radius:50%;background:var(--sun);--edge:var(--sun-d);font-size:26px;flex:none;display:grid;place-items:center}
+.qtext{font-family:var(--head);font-size:22px;font-weight:700}
+.stage{background:#fff;border-radius:var(--r);padding:18px;min-height:120px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);margin-bottom:20px}
+.items{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 8px;max-width:600px}
+.items span{display:inline-block;font-size:46px;line-height:1.1;animation:pop .35s both;animation-delay:calc(var(--i) * 45ms);position:relative}
+.items.many span{font-size:34px}
+.items.small span{font-size:28px}
+.items .x{opacity:.45}
+.items .x::after{content:"";position:absolute;left:-3px;right:-3px;top:48%;height:4px;border-radius:2px;background:#e53935;transform:rotate(-35deg)}
+.arith{display:flex;flex-direction:column;align-items:center;gap:14px}
+.arith .pics{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.arith .items{max-width:240px}
+.sign{font-family:var(--head);font-size:40px;font-weight:800;color:var(--coral-d)}
+.eqtext{font-size:42px;font-weight:800;letter-spacing:1px}
+.qmark{display:inline-block;min-width:1.1em;text-align:center;color:var(--coral-d);border-bottom:4px dashed var(--coral)}
+.bigemoji{font-size:96px;line-height:1.1}
+.fl{display:flex;flex-direction:column;align-items:center;gap:6px}
+.word{font-family:var(--head);font-size:42px;font-weight:700}
+.word .miss{display:inline-block;min-width:.8em;text-align:center;color:var(--violet-d);border-bottom:4px dashed var(--violet);margin-right:2px}
+.hl{color:var(--violet-d)}
+.clock{width:min(240px,62vw);height:auto}
+
+.opts{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.opt{min-height:96px;font-size:46px;font-family:var(--head);font-weight:800;display:flex;align-items:center;justify-content:center;padding:10px}
+.opt .time{font-size:36px}
+.opt .letter{font-size:54px;line-height:1}
+.opt svg{width:100%;max-width:120px;height:auto;max-height:96px}
+.opt svg.flag{border-radius:6px;box-shadow:0 0 0 1px rgba(0,0,0,.18)}
+.opt.ok{background:var(--green);--edge:var(--green-d);color:#fff}
+.opt.bad{opacity:.38;animation:shake .45s}
+.opts.compare{grid-template-columns:1fr auto 1fr;align-items:stretch}
+.opts.compare .opt{min-height:170px}
+.opts.compare .eqbtn{width:84px;font-size:44px}
+.opts.compare .items{gap:2px 4px}
+
+/* «Найди пару» */
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:680px;margin:18px auto 0}
+.pcard{aspect-ratio:4/3;display:grid;place-items:center;padding:10px;background:var(--teal);--edge:var(--teal-d);color:#fff;font-family:var(--head);font-size:36px;font-weight:800}
+.pcard.open{background:#fff;--edge:var(--line);animation:flip .25s}
+.pcard.done{background:#e3f8ec;--edge:#9fdcb8}
+.pcard svg{width:100%;height:auto;border-radius:5px;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+
+/* Изучение */
+.lgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:12px}
+.lbtn{min-height:76px;font-family:var(--head);font-size:34px;font-weight:800;display:grid;place-items:center}
+.seen::after{content:"✓";position:absolute;top:-6px;right:-6px;width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;font-size:14px;font-family:var(--body);display:grid;place-items:center;box-shadow:0 2px 0 var(--green-d)}
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:14px}
+.wbtn{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px;font-size:15px;font-weight:800;min-height:120px;justify-content:center}
+.wbtn svg{width:100%;max-width:96px;height:auto;border-radius:5px;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+.wbtn.locked{opacity:.45}
+.wbtn.locked svg{filter:grayscale(1) blur(1.5px)}
+.counter{margin:-6px 0 16px;font-size:16px}
+
+/* Окна */
+.modal-bg{position:fixed;inset:0;z-index:50;background:rgba(20,40,80,.45);display:grid;place-items:center;padding:16px;padding-top:calc(16px + env(safe-area-inset-top));padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+.modal{background:#fff;border-radius:28px;max-width:440px;width:100%;padding:26px 22px 22px;text-align:center;animation:pop .3s both;max-height:100%;overflow:auto;position:relative}
+.modal .close{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:14px;background:#eef4ff;font-size:20px}
+.modal h2{font-size:26px;margin:10px 0 6px}
+.modal .btn{margin-top:16px}
+.bigletter{font-size:110px;line-height:1;font-weight:800;color:var(--violet-d)}
+.bigletter small{font-size:70px;margin-left:10px;color:var(--violet)}
+.modal .flagbig{width:100%;max-width:260px;height:auto;border-radius:8px;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+.modal .fact{font-size:18px;margin-top:8px}
+.medalbig{width:130px;height:160px;animation:spinIn .8s both}
+.steps{text-align:left;font-size:17px;display:grid;gap:10px;margin-top:10px}
+.steps li{margin-left:4px}
+
+/* Конец раунда */
+.endcard{text-align:center;max-width:520px;margin:20px auto 0;padding:30px 20px}
+.trophy{font-size:96px;line-height:1.1;animation:pop .5s both}
+.endstars{font-family:var(--head);font-size:44px;font-weight:800;color:#f5a100;margin:10px 0}
+.endbtns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+
+/* Родителям */
+.sumgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+.sum{text-align:center;padding:16px 8px}
+.sum b{display:block;font-family:var(--head);font-size:30px}
+.sum span{color:var(--muted);font-size:15px}
+.pcards{display:grid;gap:18px}
+.ptable{width:100%;border-collapse:collapse;font-size:16px}
+.ptable th{font-size:13px;color:var(--muted);text-align:right;padding:0 6px 8px;font-weight:700}
+.ptable th:first-child,.ptable td:first-child{text-align:left;padding-left:0}
+.ptable td{padding:10px 6px;border-top:1px solid #edf1f8;text-align:right;vertical-align:top}
+.hard,.voices{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.hard li,.voices li{display:flex;justify-content:space-between;gap:12px;background:#f5f8fd;border-radius:12px;padding:10px 12px;font-size:16px}
+.hard b{color:var(--red-d);white-space:nowrap}
+.voices span:last-child{color:var(--muted);text-align:right}
+.confirm{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.confirm p{width:100%}
+
+/* Старт-экран (нужен iOS, чтобы включить звук касанием) */
+.gate{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:24px;background:linear-gradient(180deg,#aadcff,#eef9ff)}
+.gate-in{display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center}
+.gate-in svg{width:150px;height:150px;animation:spin 30s linear infinite}
+.gate h1{font-size:38px}
+.gate .btn{min-height:76px;font-size:28px;padding:0 44px;border-radius:28px}
+
+.floater{position:fixed;z-index:60;pointer-events:none;font-family:var(--head);font-size:28px;font-weight:800;color:#f59a00;text-shadow:0 2px 0 #fff,0 0 8px #fff;transform:translate(-50%,-50%);animation:floatUp 1.1s forwards}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:70}
+
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes bump{0%,100%{transform:scale(1)}40%{transform:scale(1.25)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-7px)}80%{transform:translateX(7px)}}
+@keyframes floatUp{from{opacity:1;transform:translate(-50%,-50%)}to{opacity:0;transform:translate(-50%,-190%)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spinIn{from{transform:scale(.2) rotate(-200deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
+@keyframes flip{from{transform:scaleX(.1)}to{transform:scaleX(1)}}
+
+/* Узкие экраны (телефон) */
+@media (max-width:640px){
+  h1{font-size:25px}
+  .brand-name,.pill{display:none}
+  .brand svg{width:36px;height:36px}
+  .top{gap:6px}
+  .tiles{grid-template-columns:1fr;gap:16px}
+  .tile{flex-direction:row;align-items:center;min-height:0;padding:16px 18px;flex-wrap:wrap;gap:8px 14px}
+  .tile .tico{font-size:34px;min-width:64px;text-align:center}
+  .tile .tname{font-size:23px}
+  .tile .bar{flex-basis:100%}
+  .games{grid-template-columns:1fr 1fr;gap:14px}
+  .gtile{min-height:130px;font-size:17px}
+  .opts{grid-template-columns:1fr 1fr;gap:14px}
+  .opts.compare{grid-template-columns:1fr auto 1fr;gap:10px}
+  .opts.compare .eqbtn{width:64px}
+  .items span{font-size:40px}
+  .items.many span{font-size:28px}
+  .items.small span{font-size:24px}
+  .qtext{font-size:19px}
+  .pgrid{grid-template-columns:repeat(3,1fr);gap:10px}
+  .sumgrid{gap:10px}
+  .sum b{font-size:24px}
+  .hello svg{width:46px;height:46px}
+}
+@media (max-width:380px){
+  .langs button{min-width:38px;padding:0 6px;font-size:14px}
+  .stars{font-size:17px;padding:4px 9px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="topwrap">
+  <header class="top">
+    <button class="brand" data-act="go" data-to="" aria-label="Home">
+      <span id="logo"></span><span class="brand-name" id="brandName">Мектепке дайын</span>
+    </button>
+    <span class="spacer"></span>
+    <span class="pill" id="lvlPill"></span>
+    <span class="stars" id="stars" aria-live="polite"><span class="st">★</span><span id="starNum">0</span></span>
+    <div class="langs" role="group" aria-label="Language">
+      <button data-act="lang" data-l="kk">Қаз</button><button data-act="lang" data-l="ru">Рус</button><button data-act="lang" data-l="en">Eng</button>
+    </div>
+    <button class="iconbtn emoji" id="sndBtn" data-act="sound">🔊</button>
+  </header>
+  <div class="ornament" aria-hidden="true"></div>
+</div>
+
+<main class="wrap" id="view"></main>
+
+<div class="gate" id="gate">
+  <div class="gate-in">
+    <span id="gateSun"></span>
+    <h1 id="gateTitle">Мектепке дайын</h1>
+    <button class="btn btn3d primary" data-act="start"><span class="emoji">▶️</span> <span id="gateStart">Бастау</span></button>
+    <div class="langs" role="group" aria-label="Language">
+      <button data-act="lang" data-l="kk">Қаз</button><button data-act="lang" data-l="ru">Рус</button><button data-act="lang" data-l="en">Eng</button>
+    </div>
+  </div>
+</div>
+
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<script>
+'use strict';
+/* =====================================================================
+   ДАННЫЕ — здесь добавляется контент (см. PRD, раздел 11)
+   ===================================================================== */
+
+// Настройки
+const ROUND = 8;        // вопросов в раунде
+const STAR_OK = 10;     // звёзд за верный ответ
+const STAR_BONUS = 5;   // бонус за ответ с первой попытки
+const STAR_PAIR = 10;   // за найденную пару в «Жұбын тап»
+const STAR_SEEN = 2;    // за первое открытие буквы или страны
+const PER_LEVEL = 100;  // звёзд на один уровень
+const MASTERY = 60;     // верных с первой попытки для полной полосы раздела
+const LANGS = ['kk', 'ru', 'en'];
+
+// Фразы интерфейса и озвучки: ключ: { kk, ru, en }
+const T = {
+  appName:  {kk:'Мектепке дайын', ru:'Готов к школе', en:'Ready for School'},
+  hello:    {kk:'Сәлем! Бүгін не үйренеміз?', ru:'Привет! Что будем учить сегодня?', en:'Hi! What shall we learn today?'},
+  start:    {kk:'Бастау', ru:'Начать', en:'Start'},
+  math:     {kk:'Математика', ru:'Математика', en:'Math'},
+  abc:      {kk:'Әліппе', ru:'Азбука', en:'Alphabet'},
+  world:    {kk:'Әлем елдері', ru:'Страны мира', en:'World countries'},
+  parents:  {kk:'Ата-аналарға', ru:'Для родителей', en:'For parents'},
+  level:    {kk:'Деңгей', ru:'Уровень', en:'Level'},
+  toNext:   {kk:'Келесі медальға дейін {n} жұлдыз', ru:'До следующей медали: {n} ★', en:'{n} ★ to the next medal'},
+  noMedals: {kk:'Алғашқы медаль — 100 жұлдызда!', ru:'Первая медаль — на 100 звёздах!', en:'Your first medal comes at 100 stars!'},
+  back:     {kk:'Артқа', ru:'Назад', en:'Back'},
+  home:     {kk:'Басты бет', ru:'Главная', en:'Home'},
+  repeat:   {kk:'Қайталап тыңдау', ru:'Послушать ещё раз', en:'Listen again'},
+  sound:    {kk:'Дыбыс', ru:'Звук', en:'Sound'},
+  close:    {kk:'Жабу', ru:'Закрыть', en:'Close'},
+
+  g_count:      {kk:'Санау', ru:'Счёт', en:'Counting'},
+  g_digits:     {kk:'Сандар', ru:'Цифры', en:'Numbers'},
+  g_compare:    {kk:'Көп пе, аз ба?', ru:'Больше или меньше', en:'More or less'},
+  g_arith:      {kk:'Қосу мен азайту', ru:'Плюс и минус', en:'Plus and minus'},
+  g_shapes:     {kk:'Пішіндер', ru:'Фигуры', en:'Shapes'},
+  g_colors:     {kk:'Түстер', ru:'Цвета', en:'Colors'},
+  g_clock:      {kk:'Сағат', ru:'Часы', en:'Clock'},
+  g_learnAbc:   {kk:'Әріптерді үйрен', ru:'Изучаем буквы', en:'Learn letters'},
+  g_findLetter: {kk:'Әріпті тап', ru:'Найди букву', en:'Find the letter'},
+  g_firstLetter:{kk:'Бірінші әріп', ru:'Первая буква', en:'First letter'},
+  g_learnWorld: {kk:'Танып біл', ru:'Знакомимся', en:'Explore'},
+  g_findFlag:   {kk:'Туды тап', ru:'Найди флаг', en:'Find the flag'},
+  g_pairs:      {kk:'Жұбын тап', ru:'Найди пару', en:'Find the pairs'},
+
+  q_count:  {kk:'Санап шық! Мұнда нешеу?', ru:'Посчитай! Сколько здесь?', en:'Let’s count! How many are there?'},
+  q_digits: {kk:'Санды тап: {x}', ru:'Найди число: {x}', en:'Find the number: {x}'},
+  q_more:   {kk:'Қай жақта көп?', ru:'Где больше?', en:'Which side has more?'},
+  q_less:   {kk:'Қай жақта аз?', ru:'Где меньше?', en:'Which side has fewer?'},
+  equal:    {kk:'Тең', ru:'Поровну', en:'Equal'},
+  left:     {kk:'Сол жақта', ru:'Слева', en:'On the left'},
+  right:    {kk:'Оң жақта', ru:'Справа', en:'On the right'},
+  q_plus:   {kk:'{a} қосу {b}. Неше болады?', ru:'{a} плюс {b}. Сколько будет?', en:'{a} plus {b}. How many is that?'},
+  q_minus:  {kk:'{a} азайту {b}. Неше болады?', ru:'{a} минус {b}. Сколько будет?', en:'{a} minus {b}. How many is that?'},
+  q_shape:  {kk:'{x} тап!', ru:'Найди {x}!', en:'Find {x}!'},
+  q_color:  {kk:'Түсті тап: {x}', ru:'Найди цвет: {x}', en:'Find the color: {x}'},
+  q_clock:  {kk:'Сағат нешені көрсетіп тұр?', ru:'Который час на часах?', en:'What time is it?'},
+  q_letter: {kk:'{L} әрпін тап. {L}, {w}', ru:'Найди букву {L}. {L}, {w}', en:'Find the letter {L}. {L}, {w}'},
+  q_first:  {kk:'Бұл сөз қай әріптен басталады?', ru:'С какой буквы начинается это слово?', en:'Which letter does this word start with?'},
+  q_flag:   {kk:'Туды тап: {x}', ru:'Найди флаг: {x}', en:'Find the flag: {x}'},
+  a_country:{kk:'{x}. Астанасы — {c}.', ru:'{x}. Столица — {c}.', en:'{x}. The capital is {c}.'},
+  card_country:{kk:'Бұл — {x}. Астанасы — {c}. {f}', ru:'Это {x}. Столица — {c}. {f}', en:'This is {x}. The capital is {c}. {f}'},
+  capital:  {kk:'Астанасы', ru:'Столица', en:'Capital'},
+
+  praise:   {kk:['Жарайсың!','Керемет!','Тамаша!','Өте жақсы!','Бәрекелді!'],
+             ru:['Молодец!','Отлично!','Здорово!','Умница!','Прекрасно!'],
+             en:['Well done!','Great!','Awesome!','Super!','Excellent!']},
+  tryAgain: {kk:'Тағы байқап көр!', ru:'Попробуй ещё раз!', en:'Try again!'},
+  roundDone:{kk:'Жарайсың! Раунд аяқталды', ru:'Молодец! Раунд окончен', en:'Well done! Round complete'},
+  roundStars:{kk:'Жиналған жұлдыз', ru:'Собрано звёзд', en:'Stars collected'},
+  again:    {kk:'Тағы ойнау', ru:'Играть ещё', en:'Play again'},
+  toGames:  {kk:'Ойындарға', ru:'К играм', en:'To games'},
+  newLevel: {kk:'Жаңа деңгей!', ru:'Новый уровень!', en:'New level!'},
+  newLevelSay:{kk:'Жаңа деңгей! Саған медаль!', ru:'Новый уровень! Вот твоя медаль!', en:'New level! Here is your medal!'},
+  hooray:   {kk:'Ура!', ru:'Ура!', en:'Hooray!'},
+  learned:  {kk:'Үйренілді: {n} / {m}', ru:'Изучено: {n} / {m}', en:'Learned: {n} / {m}'},
+  alphabet: {kk:'Әліпби', ru:'Алфавит', en:'Alphabet'},
+  opened:   {kk:'Ашылған елдер: {n} / {m}', ru:'Открыто стран: {n} / {m}', en:'Countries unlocked: {n} / {m}'},
+  locked:   {kk:'Дұрыс жауап бер — жаңа елдер ашылады!', ru:'Отвечай правильно — откроются новые страны!', en:'Answer correctly to unlock new countries!'},
+
+  voiceKk:  {kk:'Бұл құрылғыда қазақ дауысы жоқ, сондықтан қазақша сөздерді орыс дауысы оқиды.',
+             ru:'На этом устройстве нет казахского голоса, поэтому казахские слова читает русский голос.',
+             en:'This device has no Kazakh voice, so Kazakh words are read by a Russian voice.'},
+  voiceTipWin:{kk:'Кеңес: сайтты Windows компьютеріндегі Microsoft Edge-те ашыңыз — онда әдетте қазақ дауысы бар.',
+             ru:'Совет: откройте сайт в Microsoft Edge на компьютере с Windows — там обычно есть казахский голос.',
+             en:'Tip: open the site in Microsoft Edge on Windows — it usually has a Kazakh voice.'},
+  voiceTipIos:{kk:'iPhone мен iPad-та қазақ дауысы жоқ. Толық қазақша дыбыстау үшін Windows компьютеріндегі Microsoft Edge-ті қолданыңыз.',
+             ru:'На iPhone и iPad казахского голоса нет. Для полной казахской озвучки откройте сайт в Microsoft Edge на компьютере с Windows.',
+             en:'iPhone and iPad have no Kazakh voice. For full Kazakh audio, open the site in Microsoft Edge on Windows.'},
+  noSpeech: {kk:'Бұл браузер дыбыстауды қолдамайды. Сайтты Chrome, Edge немесе Safari-де ашыңыз.',
+             ru:'Этот браузер не умеет озвучивать текст. Откройте сайт в Chrome, Edge или Safari.',
+             en:'This browser cannot speak. Please open the site in Chrome, Edge or Safari.'},
+  installShort:{kk:'Сайтты iPhone экранына орнатыңыз — прогресс жоғалмайды.',
+             ru:'Установите сайт на экран iPhone — так прогресс не потеряется.',
+             en:'Add the site to your Home Screen so progress is never lost.'},
+  how:      {kk:'Қалай?', ru:'Как?', en:'How?'},
+  install:  {kk:'Экранға орнату', ru:'Установка на экран', en:'Add to Home Screen'},
+  installSteps:{kk:['Сайтты Safari-де ашыңыз.','Төмендегі «Бөлісу» ⬆️ батырмасын басыңыз.','«Басты экранға қосу» ➕ жолын таңдаңыз.','«Қосу» батырмасын басыңыз. Енді ойын қосымша сияқты ашылады.'],
+             ru:['Откройте сайт в Safari.','Нажмите кнопку «Поделиться» ⬆️ внизу экрана.','Выберите «На экран „Домой“» ➕.','Нажмите «Добавить». Теперь игра открывается как приложение.'],
+             en:['Open the site in Safari.','Tap the Share button ⬆️.','Choose “Add to Home Screen” ➕.','Tap “Add”. The game now opens like an app.']},
+
+  p_total:  {kk:'жұлдыз', ru:'звёзд', en:'stars'},
+  p_levelW: {kk:'деңгей', ru:'уровень', en:'level'},
+  p_medalsW:{kk:'медаль', ru:'медалей', en:'medals'},
+  p_sections:{kk:'Бөлімдер бойынша', ru:'По разделам', en:'By section'},
+  p_section:{kk:'Бөлім', ru:'Раздел', en:'Section'},
+  p_first:  {kk:'Бірден дұрыс', ru:'С 1-й попытки', en:'First try'},
+  p_all:    {kk:'Барлығы', ru:'Всего', en:'Total'},
+  p_acc:    {kk:'Дәлдік', ru:'Точность', en:'Accuracy'},
+  p_hard:   {kk:'Қиын болған тапсырмалар', ru:'Трудные задания', en:'Tricky tasks'},
+  p_noHard: {kk:'Әзірге қате жоқ — керемет!', ru:'Пока ошибок нет — отлично!', en:'No mistakes yet — great!'},
+  p_times:  {kk:'{n} рет қате', ru:'ошибок: {n}', en:'{n} mistakes'},
+  p_voices: {kk:'Құрылғыдағы дауыстар', ru:'Голоса на устройстве', en:'Voices on this device'},
+  p_noVoice:{kk:'жоқ', ru:'нет', en:'none'},
+  p_viaRu:  {kk:'орыс дауысы оқиды', ru:'читает русский голос', en:'read by a Russian voice'},
+  p_wait:   {kk:'жүктелуде…', ru:'загружаются…', en:'loading…'},
+  p_rec:    {kk:'жазылған дыбыс', ru:'записанная озвучка', en:'recorded voice'},
+  p_tip:    {kk:'Күніне 10–15 минут жеткілікті. Жауаптарды баламен бірге дауыстап айтыңыз.',
+             ru:'Достаточно 10–15 минут в день. Проговаривайте ответы вместе с ребёнком.',
+             en:'10–15 minutes a day is enough. Say the answers out loud together with your child.'},
+  p_reset:  {kk:'Прогресті тазалау', ru:'Сбросить прогресс', en:'Reset progress'},
+  p_storage:{kk:'Прогресс тек осы браузерде сақталады.', ru:'Прогресс хранится только в этом браузере.', en:'Progress is stored only in this browser.'},
+  p_resetQ: {kk:'Барлық жұлдыз бен медаль өшеді. Сенімдісіз бе?', ru:'Все звёзды и медали будут удалены. Вы уверены?', en:'All stars and medals will be deleted. Are you sure?'},
+  p_yes:    {kk:'Иә, тазалау', ru:'Да, сбросить', en:'Yes, reset'},
+  p_no:     {kk:'Жоқ', ru:'Нет', en:'No'},
+  p_done:   {kk:'Прогресс тазаланды.', ru:'Прогресс сброшен.', en:'Progress has been reset.'}
+};
+
+// Числа словами 0–20 (чтобы казахские числа не читались по-русски)
+const NUM = {
+  kk:['нөл','бір','екі','үш','төрт','бес','алты','жеті','сегіз','тоғыз','он','он бір','он екі','он үш','он төрт','он бес','он алты','он жеті','он сегіз','он тоғыз','жиырма'],
+  ru:['ноль','один','два','три','четыре','пять','шесть','семь','восемь','девять','десять','одиннадцать','двенадцать','тринадцать','четырнадцать','пятнадцать','шестнадцать','семнадцать','восемнадцать','девятнадцать','двадцать'],
+  en:['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty']
+};
+
+// Картинки для счёта
+const ITEMS = ['🍎','🐟','⭐','🐥','🎈','🍓','🚗','🐞','🌸','🍌','🦋','⚽','🧸','🍪'];
+
+// Цвета: tier 1 — основные, tier 2 — дополнительные (с 15 верных ответов)
+const COLORS = [
+  {id:'red',      hex:'#e53935', tier:1, kk:'қызыл',       ru:'красный',    en:'red'},
+  {id:'blue',     hex:'#1e5fd6', tier:1, kk:'көк',         ru:'синий',      en:'blue'},
+  {id:'yellow',   hex:'#fdd835', tier:1, kk:'сары',        ru:'жёлтый',     en:'yellow'},
+  {id:'green',    hex:'#43a047', tier:1, kk:'жасыл',       ru:'зелёный',    en:'green'},
+  {id:'black',    hex:'#222222', tier:1, kk:'қара',        ru:'чёрный',     en:'black'},
+  {id:'white',    hex:'#ffffff', tier:1, kk:'ақ',          ru:'белый',      en:'white'},
+  {id:'orange',   hex:'#fb8c00', tier:2, kk:'қызғылт сары', ru:'оранжевый', en:'orange'},
+  {id:'purple',   hex:'#8e24aa', tier:2, kk:'күлгін',      ru:'фиолетовый', en:'purple'},
+  {id:'pink',     hex:'#f48fb1', tier:2, kk:'қызғылт',     ru:'розовый',    en:'pink'},
+  {id:'brown',    hex:'#795548', tier:2, kk:'қоңыр',       ru:'коричневый', en:'brown'},
+  {id:'gray',     hex:'#9e9e9e', tier:2, kk:'сұр',         ru:'серый',      en:'gray'},
+  {id:'lightblue',hex:'#4fc3f7', tier:2, kk:'көгілдір',    ru:'голубой',    en:'light blue'}
+];
+
+// Фигуры: kk/ru — [именительный, винительный], en — [название, с артиклем]
+const SHAPES = [
+  {id:'circle',   svg:'<circle cx="50" cy="50" r="40"/>',                         kk:['шеңбер','шеңберді'],       ru:['круг','круг'],                     en:['circle','the circle']},
+  {id:'square',   svg:'<rect x="13" y="13" width="74" height="74" rx="5"/>',      kk:['шаршы','шаршыны'],         ru:['квадрат','квадрат'],               en:['square','the square']},
+  {id:'triangle', svg:'<path d="M50 10 L91 85 H9 Z" stroke-linejoin="round"/>',   kk:['үшбұрыш','үшбұрышты'],     ru:['треугольник','треугольник'],       en:['triangle','the triangle']},
+  {id:'rect',     svg:'<rect x="4" y="27" width="92" height="46" rx="5"/>',       kk:['тіктөртбұрыш','тіктөртбұрышты'], ru:['прямоугольник','прямоугольник'], en:['rectangle','the rectangle']},
+  {id:'oval',     svg:'<ellipse cx="50" cy="50" rx="45" ry="28"/>',               kk:['сопақша','сопақшаны'],     ru:['овал','овал'],                     en:['oval','the oval']},
+  {id:'star',     svg:starPoly(50, 54, 47),                                       kk:['жұлдыз','жұлдызды'],       ru:['звезда','звезду'],                 en:['star','the star']}
+];
+const SHAPE_COLORS = ['#ff6b6b','#4aa8f0','#ffc531','#35c16a','#a374f0','#ff9f43'];
+
+// Алфавиты: [буква, слово, картинка]; 0 четвёртым элементом — буква не в начале слова
+const ABC = {
+  kk: [
+    ['А','алма','🍎'],['Ә','әтеш','🐓'],['Б','балық','🐟'],['В','вагон','🚃'],['Г','гүл','🌷'],['Ғ','ғарыш','🚀'],
+    ['Д','доп','⚽'],['Е','есік','🚪'],['Ё','ёлка','🎄'],['Ж','жылқы','🐎'],['З','зебра','🦓'],['И','ит','🐕'],
+    ['Й','қайық','🛶',0],['К','кітап','📖'],['Қ','қоян','🐇'],['Л','лимон','🍋'],['М','мысық','🐈'],['Н','нан','🍞'],
+    ['Ң','қоңырау','🔔',0],['О','орындық','🪑'],['Ө','өрмекші','🕷️'],['П','піл','🐘'],['Р','раушан','🌹'],['С','сиыр','🐄'],
+    ['Т','түлкі','🦊'],['У','уақыт','⏳'],['Ұ','ұшақ','✈️'],['Ү','үй','🏠'],['Ф','футболка','👕'],['Х','хат','✉️'],
+    ['Һ','гауһар','💎',0],['Ц','цирк','🎪'],['Ч','чемодан','🧳'],['Ш','шар','🎈'],['Щ','щетка','🪥'],['Ъ','подъезд','🏢',0],
+    ['Ы','ыдыс','🍽️'],['І','ірімшік','🧀'],['Ь','пальто','🧥',0],['Э','эскимо','🍦'],['Ю','Юпитер','🪐'],['Я','яхта','⛵']
+  ],
+  ru: [
+    ['А','арбуз','🍉'],['Б','банан','🍌'],['В','волк','🐺'],['Г','гриб','🍄'],['Д','дом','🏠'],['Е','ель','🌲'],
+    ['Ё','ёж','🦔'],['Ж','жук','🪲'],['З','зонт','☂️'],['И','индюк','🦃'],['Й','попугай','🦜',0],['К','кот','🐈'],
+    ['Л','лиса','🦊'],['М','мяч','⚽'],['Н','нос','👃'],['О','облако','☁️'],['П','пингвин','🐧'],['Р','рыба','🐟'],
+    ['С','солнце','☀️'],['Т','торт','🎂'],['У','утка','🦆'],['Ф','флаг','🚩'],['Х','хлеб','🍞'],['Ц','цветок','🌸'],
+    ['Ч','часы','⌚'],['Ш','шар','🎈'],['Щ','щенок','🐶'],['Ъ','подъезд','🏢',0],['Ы','сыр','🧀',0],['Ь','конь','🐴',0],
+    ['Э','эскимо','🍦'],['Ю','юбка','👗'],['Я','яблоко','🍎']
+  ],
+  en: [
+    ['A','apple','🍎'],['B','ball','🏀'],['C','cat','🐈'],['D','dog','🐕'],['E','egg','🥚'],['F','fish','🐟'],
+    ['G','grapes','🍇'],['H','house','🏠'],['I','ice cream','🍦'],['J','juice','🧃'],['K','kite','🪁'],['L','lion','🦁'],
+    ['M','moon','🌙'],['N','nose','👃'],['O','orange','🍊'],['P','pig','🐷'],['Q','queen','👸'],['R','rabbit','🐇'],
+    ['S','sun','☀️'],['T','tree','🌳'],['U','umbrella','☂️'],['V','violin','🎻'],['W','whale','🐳'],['X','box','📦',0],
+    ['Y','yo-yo','🪀'],['Z','zebra','🦓']
+  ]
+};
+const NO_FIND = ['Ъ', 'Ь']; // не участвуют в «Әріпті тап»
+
+// Страны: { id, tier, kk/ru/en: [название, столица, факт, как произносить?] }
+const COUNTRIES = [
+  {id:'kz', tier:1, kk:['Қазақстан','Астана','Қазақстанда кең дала мен биік таулар бар.'], ru:['Казахстан','Астана','В Казахстане есть широкая степь и высокие горы.'], en:['Kazakhstan','Astana','Kazakhstan has wide steppes and tall mountains.']},
+  {id:'ru', tier:1, kk:['Ресей','Мәскеу','Ресей — әлемдегі ең үлкен ел.'], ru:['Россия','Москва','Россия — самая большая страна в мире.'], en:['Russia','Moscow','Russia is the largest country in the world.']},
+  {id:'cn', tier:1, kk:['Қытай','Бейжің','Қытайда Ұлы Қытай қорғаны бар.'], ru:['Китай','Пекин','В Китае есть Великая Китайская стена.'], en:['China','Beijing','China has the Great Wall.']},
+  {id:'kg', tier:1, kk:['Қырғызстан','Бішкек','Қырғызстанда әдемі Ыстықкөл көлі бар.'], ru:['Кыргызстан','Бишкек','В Кыргызстане есть красивое озеро Иссык-Куль.'], en:['Kyrgyzstan','Bishkek','Kyrgyzstan has the beautiful lake Issyk-Kul.']},
+  {id:'uz', tier:1, kk:['Өзбекстан','Ташкент','Өзбекстанда ежелгі Самарқанд қаласы бар.'], ru:['Узбекистан','Ташкент','В Узбекистане есть древний город Самарканд.'], en:['Uzbekistan','Tashkent','Uzbekistan has the ancient city of Samarkand.']},
+  {id:'tr', tier:2, kk:['Түркия','Анкара','Түркия Еуропада да, Азияда да орналасқан.'], ru:['Турция','Анкара','Турция находится и в Европе, и в Азии.'], en:['Turkey','Ankara','Turkey is in both Europe and Asia.']},
+  {id:'jp', tier:2, kk:['Жапония','Токио','Жапонияда көктемде сакура гүлдейді.'], ru:['Япония','Токио','Весной в Японии цветёт сакура.'], en:['Japan','Tokyo','In spring, cherry trees bloom in Japan.']},
+  {id:'fr', tier:2, kk:['Франция','Париж','Парижде биік Эйфель мұнарасы тұр.'], ru:['Франция','Париж','В Париже стоит высокая Эйфелева башня.'], en:['France','Paris','The tall Eiffel Tower stands in Paris.']},
+  {id:'de', tier:2, kk:['Германия','Берлин','Германияда ертегідей сарайлар көп.'], ru:['Германия','Берлин','В Германии много сказочных замков.'], en:['Germany','Berlin','Germany has many fairy-tale castles.']},
+  {id:'it', tier:2, kk:['Италия','Рим','Италия — пиццаның отаны.'], ru:['Италия','Рим','Италия — родина пиццы.'], en:['Italy','Rome','Italy is the home of pizza.']},
+  {id:'gb', tier:2, kk:['Ұлыбритания','Лондон','Лондонда Биг-Бен деген үлкен сағат бар.'], ru:['Великобритания','Лондон','В Лондоне есть большие часы Биг-Бен.'], en:['United Kingdom','London','London has a big clock called Big Ben.','the United Kingdom']},
+  {id:'us', tier:2, kk:['АҚШ','Вашингтон','АҚШ-та Азаттық мүсіні тұр.','Америка Құрама Штаттары'], ru:['США','Вашингтон','В США стоит статуя Свободы.','Соединённые Штаты Америки'], en:['USA','Washington','The Statue of Liberty stands in the USA.','the USA']},
+  {id:'br', tier:3, kk:['Бразилия','Бразилиа','Бразилияда үлкен Амазонка орманы бар.'], ru:['Бразилия','Бразилиа','В Бразилии растут огромные джунгли Амазонки.'], en:['Brazil','Brasília','Brazil has the huge Amazon rainforest.']},
+  {id:'in', tier:3, kk:['Үндістан','Нью-Дели','Үндістанда пілдер мен жолбарыстар тұрады.'], ru:['Индия','Нью-Дели','В Индии живут слоны и тигры.'], en:['India','New Delhi','Elephants and tigers live in India.']},
+  {id:'es', tier:3, kk:['Испания','Мадрид','Испанияда күн көп әрі жылы.'], ru:['Испания','Мадрид','В Испании много солнца и тепло.'], en:['Spain','Madrid','Spain is sunny and warm.']},
+  {id:'az', tier:3, kk:['Әзербайжан','Баку','Әзербайжан Каспий теңізінің жағасында орналасқан.'], ru:['Азербайджан','Баку','Азербайджан находится на берегу Каспийского моря.'], en:['Azerbaijan','Baku','Azerbaijan is on the Caspian Sea.']},
+  {id:'ge', tier:3, kk:['Грузия','Тбилиси','Грузияда биік Кавказ таулары бар.'], ru:['Грузия','Тбилиси','В Грузии высокие Кавказские горы.'], en:['Georgia','Tbilisi','Georgia has the high Caucasus mountains.']},
+  {id:'se', tier:3, kk:['Швеция','Стокгольм','Швецияда орман мен көл өте көп.'], ru:['Швеция','Стокгольм','В Швеции очень много лесов и озёр.'], en:['Sweden','Stockholm','Sweden has lots of forests and lakes.']},
+  {id:'fi', tier:3, kk:['Финляндия','Хельсинки','Финляндияны мың көлдің елі деп атайды.'], ru:['Финляндия','Хельсинки','Финляндию называют страной тысячи озёр.'], en:['Finland','Helsinki','Finland is called the land of a thousand lakes.']},
+  {id:'vn', tier:3, kk:['Вьетнам','Ханой','Вьетнамда күріш көп өсіріледі.'], ru:['Вьетнам','Ханой','Во Вьетнаме выращивают много риса.'], en:['Vietnam','Hanoi','Vietnam grows a lot of rice.']},
+  {id:'ar', tier:3, kk:['Аргентина','Буэнос-Айрес','Аргентинада таулар да, пингвиндер де бар.'], ru:['Аргентина','Буэнос-Айрес','В Аргентине есть и горы, и пингвины.'], en:['Argentina','Buenos Aires','Argentina has mountains and penguins.']},
+  {id:'ch', tier:3, kk:['Швейцария','Берн','Швейцария сағаты мен ірімшігімен танымал.'], ru:['Швейцария','Берн','Швейцария славится часами и сыром.'], en:['Switzerland','Bern','Switzerland is famous for clocks and cheese.']},
+  {id:'gr', tier:3, kk:['Грекия','Афина','Олимпиада ойындары Грекияда басталған.'], ru:['Греция','Афины','Олимпийские игры начались в Греции.'], en:['Greece','Athens','The Olympic Games began in Greece.']}
+];
+const TIER_AT = {2: 6, 3: 20}; // с какого числа верных ответов открывается ступень
+
+// Флаги (упрощённо, viewBox 30×20)
+const FLAGS = {
+  kz: () => `<rect width="30" height="20" fill="#00afca"/><rect x="1.6" y="1" width="1.6" height="18" fill="#fec50c"/>${rays(15, 8.6, 4.4, 6.6, 16, '#fec50c', .7)}<circle cx="15" cy="8.6" r="3.5" fill="#fec50c"/><path d="M9.5 13.4q5.5 3.4 11 0q-5.5 1.7-11 0z" fill="#fec50c"/>`,
+  ru: () => hStripes(['#ffffff', '#1c57a5', '#d52b1e']),
+  cn: () => `<rect width="30" height="20" fill="#de2910"/>${starPoly(5, 5, 3, '#ffde00')}${starPoly(10, 2, 1, '#ffde00', 20)}${starPoly(12, 4, 1, '#ffde00', 45)}${starPoly(12, 7, 1, '#ffde00', 0)}${starPoly(10, 9, 1, '#ffde00', 20)}`,
+  kg: () => `<rect width="30" height="20" fill="#e8112d"/>${rays(15, 10, 4, 6.8, 40, '#ffef00', .45)}<circle cx="15" cy="10" r="3.9" fill="#ffef00"/><circle cx="15" cy="10" r="3" fill="#e8112d"/><path d="M12.4 10h5.2M13.1 8.4l3.8 3.2M13.1 11.6l3.8-3.2" stroke="#ffef00" stroke-width=".55"/>`,
+  uz: () => `<rect width="30" height="20" fill="#fff"/><rect width="30" height="6.4" fill="#0099b5"/><rect y="13.6" width="30" height="6.4" fill="#1eb53a"/><rect y="6.4" width="30" height=".6" fill="#ce1126"/><rect y="13" width="30" height=".6" fill="#ce1126"/><circle cx="5" cy="3.2" r="2.2" fill="#fff"/><circle cx="5.9" cy="3.2" r="2" fill="#0099b5"/>${[[9,1.6],[11,1.6],[13,1.6],[10,3.2],[12,3.2],[11,4.8],[13,4.8]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r=".45" fill="#fff"/>`).join('')}`,
+  tr: () => `<rect width="30" height="20" fill="#e30a17"/><circle cx="11" cy="10" r="5" fill="#fff"/><circle cx="12.3" cy="10" r="4" fill="#e30a17"/>${starPoly(17.2, 10, 2.2, '#fff', -90)}`,
+  jp: () => `<rect width="30" height="20" fill="#fff"/><circle cx="15" cy="10" r="6" fill="#bc002d"/>`,
+  fr: () => vStripes(['#0055a4', '#ffffff', '#ef4135']),
+  de: () => hStripes(['#000000', '#dd0000', '#ffce00']),
+  it: () => vStripes(['#009246', '#ffffff', '#ce2b37']),
+  gb: () => `<rect width="30" height="20" fill="#012169"/><path d="M0 0L30 20M30 0L0 20" stroke="#fff" stroke-width="4"/><path d="M0 0L30 20M30 0L0 20" stroke="#c8102e" stroke-width="1.4"/><path d="M15 0v20M0 10h30" stroke="#fff" stroke-width="6"/><path d="M15 0v20M0 10h30" stroke="#c8102e" stroke-width="3.4"/>`,
+  us: () => `${Array.from({length: 13}, (_, i) => `<rect y="${(i * 20 / 13).toFixed(3)}" width="30" height="${(20 / 13 + .02).toFixed(3)}" fill="${i % 2 ? '#fff' : '#b22234'}"/>`).join('')}<rect width="12" height="10.77" fill="#3c3b6e"/>${Array.from({length: 20}, (_, i) => `<circle cx="${1.4 + (i % 5) * 2.3}" cy="${1.4 + Math.floor(i / 5) * 2.6}" r=".45" fill="#fff"/>`).join('')}`,
+  br: () => `<rect width="30" height="20" fill="#009c3b"/><path d="M15 2.2L27.5 10L15 17.8L2.5 10Z" fill="#ffdf00"/><circle cx="15" cy="10" r="4.6" fill="#002776"/><path d="M10.6 9.2q4.4-1.6 8.8 1.2" stroke="#fff" stroke-width=".7" fill="none"/>`,
+  in: () => `${hStripes(['#ff9933', '#ffffff', '#138808'])}<circle cx="15" cy="10" r="2.6" fill="none" stroke="#000080" stroke-width=".5"/>${rays(15, 10, .4, 2.5, 12, '#000080', .25)}`,
+  es: () => `<rect width="30" height="20" fill="#aa151b"/><rect y="5" width="30" height="10" fill="#f1bf00"/>`,
+  az: () => `${hStripes(['#0092bc', '#e4002b', '#00af66'])}<circle cx="14" cy="10" r="2.6" fill="#fff"/><circle cx="14.8" cy="10" r="2.1" fill="#e4002b"/>${starPoly(17.7, 10, 1.15, '#fff')}`,
+  ge: () => `<rect width="30" height="20" fill="#fff"/><rect x="13.5" width="3" height="20" fill="#ff0000"/><rect y="8.5" width="30" height="3" fill="#ff0000"/>${[[6.75, 4.25], [23.25, 4.25], [6.75, 15.75], [23.25, 15.75]].map(([x, y]) => `<path d="M${x} ${y - 2}v4M${x - 2} ${y}h4" stroke="#ff0000" stroke-width="1.1"/>`).join('')}`,
+  se: () => `<rect width="30" height="20" fill="#006aa7"/><rect x="9" width="3.5" height="20" fill="#fecc00"/><rect y="8.25" width="30" height="3.5" fill="#fecc00"/>`,
+  fi: () => `<rect width="30" height="20" fill="#fff"/><rect x="8.5" width="4.5" height="20" fill="#003580"/><rect y="7.75" width="30" height="4.5" fill="#003580"/>`,
+  vn: () => `<rect width="30" height="20" fill="#da251d"/>${starPoly(15, 10.4, 5.6, '#ffff00')}`,
+  ar: () => `${hStripes(['#74acdf', '#ffffff', '#74acdf'])}${rays(15, 10, 1.6, 3, 16, '#f6b40e', .4)}<circle cx="15" cy="10" r="1.7" fill="#f6b40e"/>`,
+  ch: () => `<rect width="30" height="20" fill="#da291c"/><rect x="13" y="4" width="4" height="12" fill="#fff"/><rect x="9" y="8" width="12" height="4" fill="#fff"/>`,
+  gr: () => `${Array.from({length: 9}, (_, i) => `<rect y="${(i * 20 / 9).toFixed(3)}" width="30" height="${(20 / 9 + .02).toFixed(3)}" fill="${i % 2 ? '#fff' : '#0d5eaf'}"/>`).join('')}<rect width="11.1" height="11.1" fill="#0d5eaf"/><rect x="4.44" width="2.22" height="11.1" fill="#fff"/><rect y="4.44" width="11.1" height="2.22" fill="#fff"/>`
+};
+
+/* =====================================================================
+   УТИЛИТЫ
+   ===================================================================== */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const rnd = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const sample = (a, k) => shuffle(a).slice(0, k);
+const cap = s => s ? s[0].toUpperCase() + s.slice(1) : s;
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const RM = matchMedia('(prefers-reduced-motion: reduce)');
+const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const isStandalone = () => navigator.standalone === true || matchMedia('(display-mode: standalone)').matches;
+
+function t(key, vars, lang) {
+  const e = T[key];
+  if (!e) return key;
+  let s = e[lang || S.lang];
+  if (vars && typeof s === 'string') s = s.replace(/\{(\w+)\}/g, (m, n) => vars[n] !== undefined ? vars[n] : m);
+  return s;
+}
+
+function starPoly(cx, cy, r, fill, rot = 0) {
+  const p = [];
+  for (let i = 0; i < 10; i++) {
+    const a = (i * 36 - 90 + rot) * Math.PI / 180, rr = i % 2 ? r * .4 : r;
+    p.push((cx + rr * Math.cos(a)).toFixed(2) + ',' + (cy + rr * Math.sin(a)).toFixed(2));
+  }
+  return `<polygon points="${p.join(' ')}"${fill ? ` fill="${fill}"` : ''}/>`;
+}
+function rays(cx, cy, r1, r2, n, color, w) {
+  let d = '';
+  for (let i = 0; i < n; i++) {
+    const a = i * 2 * Math.PI / n, c = Math.cos(a), s = Math.sin(a);
+    d += `M${(cx + r1 * c).toFixed(2)} ${(cy + r1 * s).toFixed(2)}L${(cx + r2 * c).toFixed(2)} ${(cy + r2 * s).toFixed(2)}`;
+  }
+  return `<path d="${d}" stroke="${color}" stroke-width="${w}" stroke-linecap="round"/>`;
+}
+function hStripes(cols) { const h = 20 / cols.length; return cols.map((c, i) => `<rect y="${(i * h).toFixed(3)}" width="30" height="${(h + .02).toFixed(3)}" fill="${c}"/>`).join(''); }
+function vStripes(cols) { const w = 30 / cols.length; return cols.map((c, i) => `<rect x="${(i * w).toFixed(3)}" width="${(w + .02).toFixed(3)}" height="20" fill="${c}"/>`).join(''); }
+
+const SUN = (() => {
+  let r = '';
+  for (let i = 0; i < 12; i++) {
+    const a = i * Math.PI / 6;
+    r += `M${(32 + 22 * Math.cos(a)).toFixed(1)} ${(32 + 22 * Math.sin(a)).toFixed(1)}L${(32 + 29 * Math.cos(a)).toFixed(1)} ${(32 + 29 * Math.sin(a)).toFixed(1)}`;
+  }
+  return `<svg viewBox="0 0 64 64" aria-hidden="true"><path d="${r}" stroke="#ffb800" stroke-width="5" stroke-linecap="round"/><circle cx="32" cy="32" r="17" fill="#ffc531"/><circle cx="26" cy="29" r="2.2" fill="#7a4a00"/><circle cx="38" cy="29" r="2.2" fill="#7a4a00"/><path d="M25 36q7 6 14 0" stroke="#7a4a00" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="21" cy="35" r="2.6" fill="#ff9a6e" opacity=".7"/><circle cx="43" cy="35" r="2.6" fill="#ff9a6e" opacity=".7"/></svg>`;
+})();
+
+function medalSvg(n, cls = 'medal') {
+  return `<svg viewBox="0 0 64 80" class="${cls}" role="img" aria-label="${esc(t('level'))} ${n}"><path d="M17 0h12l7 27H24z" fill="#4aa8f0"/><path d="M47 0H35l-7 27h12z" fill="#ff7a66"/><circle cx="32" cy="52" r="25" fill="#f0a000"/><circle cx="32" cy="52" r="20" fill="#ffd34d"/><text x="32" y="53" text-anchor="middle" dominant-baseline="central" font-family="Rubik,system-ui,sans-serif" font-weight="800" font-size="${n > 99 ? 15 : 21}" fill="#8a5200">${n}</text></svg>`;
+}
+const flagSvg = (c, cls = 'flag', label = false) =>
+  `<svg viewBox="0 0 30 20" class="${cls}" ${label ? `role="img" aria-label="${esc(cname(c))}"` : 'aria-hidden="true"'}>${FLAGS[c.id]()}</svg>`;
+const shapeSvg = (s, color) =>
+  `<svg viewBox="0 0 100 100" aria-hidden="true"><g fill="${color}" stroke="${color}" stroke-width="3">${s.svg}</g></svg>`;
+const BLOB = ['M50 8C72 6 92 24 90 48C88 72 72 92 48 90C24 88 8 72 10 48C12 26 28 10 50 8Z',
+              'M52 10C76 8 94 30 88 54C83 76 64 92 42 88C20 84 6 64 12 42C17 22 32 12 52 10Z'];
+const blobSvg = (hex, i) =>
+  `<svg viewBox="0 0 100 100" aria-hidden="true"><path d="${BLOB[i % 2]}" fill="${hex}" stroke="rgba(36,50,79,.22)" stroke-width="3" transform="rotate(${i * 40} 50 50)"/></svg>`;
+
+function clockSvg(h, m) {
+  let marks = '', nums = '';
+  for (let i = 1; i <= 12; i++) {
+    const a = (i * 30 - 90) * Math.PI / 180;
+    nums += `<text x="${(100 + 70 * Math.cos(a)).toFixed(1)}" y="${(100 + 70 * Math.sin(a)).toFixed(1)}" text-anchor="middle" dominant-baseline="central" font-family="Rubik,system-ui,sans-serif" font-weight="700" font-size="20" fill="#24324f">${i}</text>`;
+  }
+  for (let i = 0; i < 60; i++) {
+    const a = i * 6 * Math.PI / 180, r1 = i % 5 ? 85 : 81;
+    marks += `M${(100 + r1 * Math.cos(a)).toFixed(1)} ${(100 + r1 * Math.sin(a)).toFixed(1)}L${(100 + 88 * Math.cos(a)).toFixed(1)} ${(100 + 88 * Math.sin(a)).toFixed(1)}`;
+  }
+  const ha = ((h % 12) + m / 60) * 30, ma = m * 6;
+  return `<svg viewBox="0 0 200 200" class="clock" role="img" aria-label="${h}:${m ? '30' : '00'}">
+    <circle cx="100" cy="100" r="96" fill="#ff7a66"/><circle cx="100" cy="100" r="90" fill="#fff"/>
+    <path d="${marks}" stroke="#9aa8c4" stroke-width="2"/>${nums}
+    <line x1="100" y1="100" x2="100" y2="55" stroke="#24324f" stroke-width="9" stroke-linecap="round" transform="rotate(${ha} 100 100)"/>
+    <line x1="100" y1="100" x2="100" y2="30" stroke="#1e5fd6" stroke-width="6" stroke-linecap="round" transform="rotate(${ma} 100 100)"/>
+    <circle cx="100" cy="100" r="7" fill="#ffc531" stroke="#24324f" stroke-width="2"/></svg>`;
+}
+
+function clockSay(h, m, l) {
+  const w = NUM[l][h];
+  if (l === 'kk') return m ? `Сағат ${w} жарым` : `Сағат ${w}`;
+  if (l === 'ru') {
+    if (m) return (h === 1 ? 'Час' : cap(w)) + ' тридцать';
+    if (h === 1) return 'Час';
+    return cap(w) + (h <= 4 ? ' часа' : ' часов');
+  }
+  return m ? `Half past ${w}` : `${cap(w)} o'clock`;
+}
+
+const country = id => COUNTRIES.find(c => c.id === id);
+const cname = (c, speak, l = S.lang) => (speak && c[l][3]) || c[l][0];
+function wordHtml(e) {
+  const [L, w, , flag] = e;
+  const i = flag === 0 ? w.toLowerCase().indexOf(L.toLowerCase()) : 0;
+  if (i < 0) return esc(w);
+  return esc(w.slice(0, i)) + `<b class="hl">${esc(w[i])}</b>` + esc(w.slice(i + 1));
+}
+
+/* =====================================================================
+   СОСТОЯНИЕ И ХРАНЕНИЕ
+   ===================================================================== */
+const KEY = 'mektepke-dayin-v1';
+const fresh = () => ({
+  lang: 'kk', abcLang: 'kk', sound: true, stars: 0, medals: [],
+  stats: {math: {c: 0, a: 0, ok: 0}, abc: {c: 0, a: 0, ok: 0}, world: {c: 0, a: 0, ok: 0}},
+  miss: {}, seenFlags: [], seenLetters: [], voiceNoteHidden: false, installHidden: false
+});
+function load() {
+  const d = fresh();
+  try {
+    const o = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (o && typeof o === 'object') {
+      Object.assign(d, o);
+      d.stats = fresh().stats;
+      for (const k in d.stats) Object.assign(d.stats[k], (o.stats || {})[k] || {});
+      if (!LANGS.includes(d.lang)) d.lang = 'kk';
+      if (!LANGS.includes(d.abcLang)) d.abcLang = d.lang;
+    }
+  } catch (e) { /* без хранилища тоже работаем */ }
+  return d;
+}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+let S = load();
+
+const level = () => Math.floor(S.stars / PER_LEVEL) + 1;
+const pct = sec => Math.min(100, Math.round(S.stats[sec].c / MASTERY * 100));
+const mathOk = () => S.stats.math.ok;
+const worldTier = () => S.stats.world.ok >= TIER_AT[3] ? 3 : S.stats.world.ok >= TIER_AT[2] ? 2 : 1;
+const unlockedCountries = () => COUNTRIES.filter(c => c.tier <= worldTier());
+
+/* =====================================================================
+   ЗВУК: голос (Web Speech API) + эффекты (Web Audio API)
+   ===================================================================== */
+// Встроенные в систему голоса «Eloquence» и «новелти» звучат как робот — понижаем их.
+const BAD_VOICES = /eloquence|albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|fred|junior|ralph|kathy|grandma|grandpa|rocko|shelley|flo\b|eddy|reed|sandy/i;
+const Speech = {
+  ok: 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window,
+  voices: {}, all: [], hasKk: false, ready: false, cur: null, audio: null,
+  load() {
+    if (!this.ok) return;
+    const vs = speechSynthesis.getVoices();
+    if (!vs.length) return;
+    this.all = vs;
+    for (const l of LANGS) this.voices[l] = bestVoice(vs, l);
+    this.hasKk = !!this.voices.kk;
+    const first = !this.ready;
+    this.ready = true;
+    if (first) onVoicesReady();
+  }
+};
+function bestVoice(vs, l) {
+  const full = {kk: 'kk-kz', ru: 'ru-ru', en: 'en-us'}[l];
+  let best = null, score = -1e9;
+  for (const v of vs) {
+    const lang = (v.lang || '').replace('_', '-').toLowerCase();
+    if (!(lang === l || lang.startsWith(l + '-'))) continue;
+    let s = 0;
+    if (lang === full) s += 10;
+    if (/natural|online|neural/i.test(v.name)) s += 6;
+    if (/google/i.test(v.name)) s += 4;
+    if (/enhanced|premium|siri|улучшенн/i.test(v.name)) s += 3;
+    if (BAD_VOICES.test(v.name)) s -= 20;
+    if (v.default) s += 1;
+    if (s > score) { score = s; best = v; }
+  }
+  return best;
+}
+if (Speech.ok) {
+  Speech.load();
+  try { speechSynthesis.addEventListener('voiceschanged', () => Speech.load()); } catch (e) {}
+  // Safari иногда не присылает voiceschanged — опрашиваем несколько секунд
+  let tries = 0;
+  const poll = setInterval(() => { Speech.load(); if (Speech.ready || ++tries > 20) clearInterval(poll); }, 250);
+}
+
+// Записанная озвучка: audio/<lang>/index.json = {"текст фразы": "файл.mp3"}.
+// Если для всех частей фразы есть файлы — играем их, иначе читает синтез речи устройства.
+const AUDIO = {};
+for (const l of LANGS) {
+  try {
+    fetch(`audio/${l}/index.json`).then(r => r.ok ? r.json() : null)
+      .then(j => { if (j && Object.keys(j).length) { AUDIO[l] = j; onVoicesReady(); } }).catch(() => {});
+  } catch (e) {}
+}
+const bufCache = new Map();
+function loadBuf(url) {
+  if (!bufCache.has(url)) {
+    if (bufCache.size > 80) bufCache.delete(bufCache.keys().next().value);
+    bufCache.set(url, fetch(url)
+      .then(r => { if (!r.ok) throw new Error(url); return r.arrayBuffer(); })
+      .then(ab => new Promise((ok, err) => Sfx.ctx.decodeAudioData(ab, ok, err))) // форма с колбэками — для старых Safari
+      .catch(e => { bufCache.delete(url); throw e; }));
+  }
+  return bufCache.get(url);
+}
+function playBuf(b) {
+  return new Promise(r => {
+    const s = Sfx.ctx.createBufferSource();
+    s.buffer = b; s.onended = r;
+    s.connect(Sfx.ctx.destination);
+    Speech.src = s;
+    s.start();
+  });
+}
+async function playClips(urls, tok) {
+  try {
+    const bufs = await Promise.all(urls.map(loadBuf));
+    for (const b of bufs) { if (Speech.seq !== tok) return true; await playBuf(b); }
+    return true;
+  } catch (e) { return false; }
+}
+
+function stopSpeech() {
+  Speech.seq = (Speech.seq || 0) + 1;
+  try { if (Speech.ok) speechSynthesis.cancel(); } catch (e) {}
+  if (Speech.src) { try { Speech.src.stop(); } catch (e) {} Speech.src = null; }
+}
+
+// parts — строка или массив частей (например, [похвала, ответ]); части озвучиваются подряд
+function say(parts, lang = S.lang) {
+  parts = [].concat(parts).filter(Boolean);
+  return new Promise(res => {
+    if (!S.sound || !parts.length || !unlocked) return res();
+    stopSpeech();
+    const tok = Speech.seq, text = parts.join(' ');
+    let done = false, tm;
+    const fin = () => { if (done) return; done = true; clearTimeout(tm); res(); };
+    tm = setTimeout(fin, 2500 + text.length * 110);
+    const A = AUDIO[lang];
+    if (A && Sfx.ctx && parts.every(p => A[p])) {
+      playClips(parts.map(p => `audio/${lang}/${A[p]}`), tok).then(ok => {
+        if (ok || Speech.seq !== tok) fin(); else speakTTS(text, lang, fin);
+      });
+      return;
+    }
+    speakTTS(text, lang, fin);
+  });
+}
+function speakTTS(text, lang, fin) {
+  if (!Speech.ok) return fin();
+  const u = new SpeechSynthesisUtterance(text);
+  let v = Speech.voices[lang], ul = {kk: 'kk-KZ', ru: 'ru-RU', en: 'en-US'}[lang];
+  if (!v && lang === 'kk') { v = Speech.voices.ru; ul = 'ru-RU'; }
+  if (v) { u.voice = v; u.lang = v.lang; } else u.lang = ul;
+  u.rate = .92; u.pitch = 1.05;
+  u.onend = fin; u.onerror = fin;
+  Speech.cur = u; // держим ссылку: иначе Safari/Chrome могут «потерять» фразу
+  try { speechSynthesis.speak(u); } catch (e) { fin(); }
+}
+
+const Sfx = {
+  ctx: null,
+  unlock() {
+    try {
+      // iOS: звук эффектов не глушится переключателем «Без звука»
+      if (navigator.audioSession) navigator.audioSession.type = 'playback';
+    } catch (e) {}
+    try {
+      if (!this.ctx) { const AC = window.AudioContext || window.webkitAudioContext; if (AC) this.ctx = new AC(); }
+      if (this.ctx && this.ctx.state !== 'running') this.ctx.resume();
+    } catch (e) {}
+  },
+  tone(f, at, dur, type = 'triangle', vol = .16) {
+    const c = this.ctx, t0 = c.currentTime + at;
+    const o = c.createOscillator(), g = c.createGain();
+    o.type = type; o.frequency.setValueAtTime(f, t0);
+    g.gain.setValueAtTime(.0001, t0);
+    g.gain.exponentialRampToValueAtTime(vol, t0 + .02);
+    g.gain.exponentialRampToValueAtTime(.0001, t0 + dur);
+    o.connect(g); g.connect(c.destination);
+    o.start(t0); o.stop(t0 + dur + .05);
+  },
+  play(kind) {
+    if (!S.sound || !this.ctx) return;
+    try {
+      if (kind === 'ok') [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => this.tone(f, i * .08, .25));
+      else if (kind === 'bad') { this.tone(330, 0, .18, 'sine', .08); this.tone(262, .14, .25, 'sine', .08); }
+      else if (kind === 'flip') this.tone(880, 0, .07, 'sine', .05);
+      else if (kind === 'win') {
+        [523.25, 659.25, 783.99, 1046.5, 783.99, 1046.5].forEach((f, i) => this.tone(f, i * .12, .22, 'square', .07));
+        [523.25, 659.25, 783.99].forEach(f => this.tone(f, .8, .7, 'triangle', .1));
+      }
+    } catch (e) {}
+  }
+};
+
+/* =====================================================================
+   ЭФФЕКТЫ: конфетти, «+N», окна
+   ===================================================================== */
+const fx = {parts: [], running: false};
+function confetti(from) {
+  if (RM.matches) return;
+  const cv = $('#fx'), dpr = window.devicePixelRatio || 1;
+  if (cv.width !== innerWidth * dpr) { cv.width = innerWidth * dpr; cv.height = innerHeight * dpr; }
+  const r = from ? from.getBoundingClientRect() : {left: innerWidth / 2, top: innerHeight / 3, width: 0, height: 0};
+  const x0 = r.left + r.width / 2, y0 = r.top + r.height / 2;
+  const cols = ['#ff7a66', '#ffc531', '#35c16a', '#4aa8f0', '#8f6cf0', '#ff8ac0'];
+  for (let i = 0; i < 70; i++) fx.parts.push({
+    x: x0, y: y0, vx: (Math.random() - .5) * 13, vy: -Math.random() * 13 - 3,
+    s: 6 + Math.random() * 6, c: pick(cols), a: Math.random() * 6, va: (Math.random() - .5) * .4, life: 0
+  });
+  if (!fx.running) { fx.running = true; requestAnimationFrame(fxLoop); }
+}
+function fxLoop() {
+  const cv = $('#fx'), ctx = cv.getContext('2d'), dpr = window.devicePixelRatio || 1;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, innerWidth, innerHeight);
+  fx.parts = fx.parts.filter(p => p.life < 110 && p.y < innerHeight + 20);
+  for (const p of fx.parts) {
+    p.life++; p.vy += .42; p.vx *= .985; p.x += p.vx; p.y += p.vy; p.a += p.va;
+    ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a);
+    ctx.fillStyle = p.c; ctx.fillRect(-p.s / 2, -p.s / 3, p.s, p.s * .66);
+    ctx.restore();
+  }
+  if (fx.parts.length) requestAnimationFrame(fxLoop);
+  else { fx.running = false; ctx.clearRect(0, 0, innerWidth, innerHeight); }
+}
+function floater(txt, el) {
+  const f = document.createElement('div');
+  f.className = 'floater'; f.textContent = txt;
+  const r = (el || $('#stars')).getBoundingClientRect();
+  f.style.left = (r.left + r.width / 2) + 'px';
+  f.style.top = (r.top + Math.min(r.height / 2, 30)) + 'px';
+  document.body.appendChild(f);
+  setTimeout(() => f.remove(), 1200);
+}
+
+let modal = null;           // {el, kind}
+const levelQueue = [];
+let modalWaiters = [];
+function openModal(html, kind = 'card') {
+  closeModal(true);
+  const bg = document.createElement('div');
+  bg.className = 'modal-bg';
+  bg.innerHTML = `<div class="modal" role="dialog" aria-modal="true"><button class="close" data-act="close" aria-label="${esc(t('close'))}">✕</button>${html}</div>`;
+  bg.addEventListener('click', e => { if (e.target === bg) closeModal(); });
+  document.body.appendChild(bg);
+  modal = {el: bg, kind};
+  const f = $('.modal .btn', bg) || $('.modal .close', bg);
+  if (f) f.focus({preventScroll: true});
+}
+function closeModal(silent) {
+  if (!modal) return;
+  modal.el.remove();
+  modal = null;
+  if (silent) return;
+  if (levelQueue.length) return showLevel(levelQueue.shift());
+  const w = modalWaiters; modalWaiters = [];
+  w.forEach(r => r());
+}
+const whenNoModal = () => modal ? new Promise(r => modalWaiters.push(r)) : Promise.resolve();
+function flushLevels() { if (!modal && levelQueue.length) showLevel(levelQueue.shift()); }
+function showLevel(n) {
+  openModal(`${medalSvg(n, 'medalbig')}<h2>${t('newLevel')}</h2><p class="muted">${t('level')} ${n}</p><button class="btn btn3d primary" data-act="close">🎉 ${t('hooray')}</button>`, 'level');
+  Sfx.play('win'); confetti(null);
+  say(t('newLevelSay'));
+}
+
+function addStars(n, el) {
+  const before = level();
+  S.stars += n;
+  const after = level();
+  for (let l = before + 1; l <= after; l++) {
+    if (!S.medals.includes(l)) S.medals.push(l);
+    levelQueue.push(l);
+  }
+  save();
+  updateHeader(true);
+  floater('+' + n, el);
+}
+
+/* =====================================================================
+   ИГРЫ
+   Каждая make() возвращает вопрос:
+   { key, lang, say, text?, stage?, layout?, opts:[{val, html, aria, cls?}], ans, after }
+   ===================================================================== */
+const SECTIONS = {
+  math: ['count', 'digits', 'compare', 'arith', 'shapes', 'colors', 'clock'],
+  abc: ['learnAbc', 'findLetter', 'firstLetter'],
+  world: ['learnWorld', 'findFlag', 'pairs']
+};
+const GAMES = {
+  count:      {sec: 'math', icon: '🍎', make: mkCount, label: k => k},
+  digits:     {sec: 'math', icon: '<b>7</b>', make: mkDigits, label: k => k},
+  compare:    {sec: 'math', icon: '⚖️', make: mkCompare, label: k => k.replace(':', ' ⇄ ')},
+  arith:      {sec: 'math', icon: '<b>+−</b>', make: mkArith, label: k => k.replace('-', ' − ').replace('+', ' + ')},
+  shapes:     {sec: 'math', icon: '🔺', make: mkShapes, label: k => SHAPES.find(s => s.id === k)[S.lang][0]},
+  colors:     {sec: 'math', icon: '🎨', make: mkColors, label: k => COLORS.find(c => c.id === k)[S.lang]},
+  clock:      {sec: 'math', icon: '🕒', make: mkClock, label: k => k},
+  learnAbc:   {sec: 'abc', icon: '📖', route: 'learn/abc'},
+  findLetter: {sec: 'abc', icon: '🔎', make: mkFindLetter, label: k => k.split(':')[1]},
+  firstLetter:{sec: 'abc', icon: '<b>?а</b>', make: mkFirstLetter, label: k => k.split(':')[1]},
+  learnWorld: {sec: 'world', icon: '🗺️', route: 'learn/world'},
+  findFlag:   {sec: 'world', icon: '🚩', make: mkFindFlag, label: k => cname(country(k))},
+  pairs:      {sec: 'world', icon: '🃏', route: 'play/pairs'}
+};
+
+function numOpts(ans, lo, hi) {
+  const s = new Set([ans]);
+  for (const d of shuffle([-1, 1, -2, 2, 3, -3])) {
+    if (s.size >= 4) break;
+    const v = ans + d;
+    if (v >= lo && v <= hi) s.add(v);
+  }
+  while (s.size < 4) s.add(rnd(lo, hi));
+  return shuffle([...s]).map(v => ({val: v, html: `<span class="num">${v}</span>`, aria: String(v)}));
+}
+function items(e, n, cls = '', cross = 0) {
+  return `<div class="items ${cls} ${n > 10 ? 'many' : ''}">${Array.from({length: n}, (_, i) =>
+    `<span class="emoji ${i >= n - cross ? 'x' : ''}" style="--i:${i}">${e}</span>`).join('')}</div>`;
+}
+
+function mkCount() {
+  const ok = mathOk(), max = ok >= 40 ? 20 : ok >= 15 ? 10 : 5, n = rnd(1, max), l = S.lang;
+  return {key: String(n), lang: l, say: t('q_count'), stage: items(pick(ITEMS), n), opts: numOpts(n, 1, max), ans: n, after: NUM[l][n]};
+}
+function mkDigits() {
+  const max = mathOk() >= 15 ? 20 : 10, n = rnd(0, max), l = S.lang;
+  return {key: String(n), lang: l, say: t('q_digits', {x: NUM[l][n]}), opts: numOpts(n, 0, max), ans: n, after: NUM[l][n]};
+}
+function mkCompare() {
+  const max = mathOk() >= 15 ? 10 : 5, l = S.lang, e = pick(ITEMS);
+  let a, b;
+  if (Math.random() < .2) a = b = rnd(1, max);
+  else do { a = rnd(1, max); b = rnd(1, max); } while (a === b);
+  const more = Math.random() < .5;
+  const ans = a === b ? 'eq' : more ? (a > b ? 'L' : 'R') : (a < b ? 'L' : 'R');
+  return {
+    key: `${a}:${b}`, lang: l, say: t(more ? 'q_more' : 'q_less'), layout: 'compare',
+    opts: [
+      {val: 'L', html: items(e, a, 'small'), aria: t('left')},
+      {val: 'eq', html: '<span class="num">=</span>', aria: t('equal'), cls: 'eqbtn'},
+      {val: 'R', html: items(e, b, 'small'), aria: t('right')}
+    ],
+    ans, after: {L: t('left'), R: t('right'), eq: t('equal')}[ans]
+  };
+}
+function mkArith() {
+  const max = mathOk() >= 20 ? 10 : 5, plus = Math.random() < .5, l = S.lang, e = pick(ITEMS);
+  let a, b, r, pics;
+  if (plus) { a = rnd(1, max - 1); b = rnd(1, max - a); r = a + b; pics = `${items(e, a, 'small')}<span class="sign">+</span>${items(e, b, 'small')}`; }
+  else { a = rnd(2, max); b = rnd(1, a - 1); r = a - b; pics = items(e, a, 'small', b); }
+  const stage = `<div class="arith"><div class="pics">${pics}</div><div class="eqtext rubik">${a} ${plus ? '+' : '−'} ${b} = <span class="qmark">?</span></div></div>`;
+  return {key: `${a}${plus ? '+' : '-'}${b}`, lang: l, say: t(plus ? 'q_plus' : 'q_minus', {a: NUM[l][a], b: NUM[l][b]}), stage, opts: numOpts(r, 0, max), ans: r, after: NUM[l][r]};
+}
+function mkShapes() {
+  const four = sample(SHAPES, 4), cols = sample(SHAPE_COLORS, 4), tg = pick(four), l = S.lang;
+  return {
+    key: tg.id, lang: l, say: t('q_shape', {x: l === 'kk' ? cap(tg.kk[1]) : tg[l][1]}),
+    opts: four.map((s, i) => ({val: s.id, html: shapeSvg(s, cols[i]), aria: s[l][0]})),
+    ans: tg.id, after: cap(tg[l][0])
+  };
+}
+function mkColors() {
+  const pool = COLORS.filter(c => c.tier === 1 || mathOk() >= 15), four = sample(pool, 4), tg = pick(four), l = S.lang;
+  return {
+    key: tg.id, lang: l, say: t('q_color', {x: tg[l]}),
+    opts: four.map((c, i) => ({val: c.id, html: blobSvg(c.hex, i), aria: c[l]})),
+    ans: tg.id, after: cap(tg[l])
+  };
+}
+function mkClock() {
+  const half = mathOk() >= 30, l = S.lang;
+  const mk = () => ({h: rnd(1, 12), m: half && Math.random() < .5 ? 30 : 0});
+  const fmt = x => `${x.h}:${x.m ? '30' : '00'}`;
+  const tg = mk(), set = new Map([[fmt(tg), tg]]);
+  while (set.size < 4) { const x = mk(); set.set(fmt(x), x); }
+  return {
+    key: fmt(tg), lang: l, say: t('q_clock'), stage: clockSvg(tg.h, tg.m),
+    opts: shuffle([...set.values()]).map(x => ({val: fmt(x), html: `<span class="num time">${fmt(x)}</span>`, aria: clockSay(x.h, x.m, l)})),
+    ans: fmt(tg), after: clockSay(tg.h, tg.m, l)
+  };
+}
+function mkFindLetter() {
+  const al = S.abcLang, list = ABC[al].filter(e => !NO_FIND.includes(e[0])), four = sample(list, 4), tg = pick(four);
+  return {
+    key: `${al}:${tg[0]}`, lang: al, say: t('q_letter', {L: tg[0], w: tg[1]}, al), text: t('g_findLetter', null, al),
+    stage: `<div class="bigemoji emoji">${tg[2]}</div>`,
+    opts: four.map(e => ({val: e[0], html: `<span class="letter">${e[0]}</span>`, aria: e[0]})),
+    ans: tg[0], after: `${tg[0]}, ${tg[1]}`
+  };
+}
+function mkFirstLetter() {
+  const al = S.abcLang, tg = pick(ABC[al].filter(e => e[3] !== 0));
+  const others = sample(ABC[al].filter(e => e[0] !== tg[0] && !NO_FIND.includes(e[0])), 3);
+  const w = tg[1];
+  return {
+    key: `${al}:${tg[0]}`, lang: al, say: [w, t('q_first', null, al)], text: t('q_first', null, al),
+    stage: `<div class="fl"><div class="bigemoji emoji">${tg[2]}</div><div class="word"><span class="miss">?</span>${esc(w.slice(1))}</div></div>`,
+    opts: shuffle([tg, ...others]).map(e => ({val: e[0], html: `<span class="letter">${e[0]}</span>`, aria: e[0]})),
+    ans: tg[0], after: `${tg[0]}, ${w}`
+  };
+}
+function mkFindFlag() {
+  const four = sample(unlockedCountries(), 4), tg = pick(four), l = S.lang;
+  return {
+    key: tg.id, lang: l, say: t('q_flag', {x: cname(tg, true)}), text: t('q_flag', {x: cname(tg)}),
+    opts: four.map(c => ({val: c.id, html: flagSvg(c), aria: cname(c)})),
+    ans: tg.id, after: t('a_country', {x: cname(tg, true), c: tg[l][1]})
+  };
+}
+
+/* ---------- Список всех озвучиваемых фраз (для генерации mp3: tools/make_voice.py) ----------
+   В консоли браузера: copy(JSON.stringify(speechPhrases()))  → вставить в tools/phrases.json */
+function speechPhrases() {
+  const out = {};
+  for (const l of LANGS) {
+    const tl = (k, v) => t(k, v, l), set = new Set();
+    const add = (...xs) => xs.forEach(x => [].concat(x).forEach(y => y && set.add(y)));
+    add(['hello', 'math', 'abc', 'world', 'g_learnAbc', 'g_learnWorld', 'g_pairs', 'q_count', 'q_more', 'q_less',
+         'q_clock', 'q_first', 'tryAgain', 'roundDone', 'newLevelSay', 'left', 'right', 'equal'].map(k => tl(k)), T.praise[l]);
+    for (let n = 0; n <= 20; n++) add(NUM[l][n], tl('q_digits', {x: NUM[l][n]}));
+    for (let a = 1; a <= 10; a++) for (let b = 1; a + b <= 10; b++) add(tl('q_plus', {a: NUM[l][a], b: NUM[l][b]}));
+    for (let a = 2; a <= 10; a++) for (let b = 1; b < a; b++) add(tl('q_minus', {a: NUM[l][a], b: NUM[l][b]}));
+    SHAPES.forEach(s => add(tl('q_shape', {x: l === 'kk' ? cap(s.kk[1]) : s[l][1]}), cap(s[l][0])));
+    COLORS.forEach(c => add(tl('q_color', {x: c[l]}), cap(c[l])));
+    for (let h = 1; h <= 12; h++) add(clockSay(h, 0, l), clockSay(h, 30, l));
+    ABC[l].forEach(([L, w]) => { add(`${L}, ${w}`, w); if (!NO_FIND.includes(L)) add(tl('q_letter', {L, w})); });
+    COUNTRIES.forEach(c => {
+      const x = cname(c, true, l), [, cap_, fact] = c[l];
+      add(x, tl('q_flag', {x}), tl('a_country', {x, c: cap_}), tl('card_country', {x, c: cap_, f: fact}));
+    });
+    out[l] = [...set];
+  }
+  return out;
+}
+
+/* ---------- Раунд из 8 вопросов ---------- */
+let R = null;   // текущий раунд
+let P = null;   // текущая игра «Жұбын тап»
+
+function playTop(sec, i, total, got) {
+  return `<div class="playtop">
+    <button class="backbtn btn3d" data-act="go" data-to="${sec}" aria-label="${esc(t('back'))}">←</button>
+    <div class="dots" role="img" aria-label="${i + 1} / ${total}">${Array.from({length: total}, (_, k) => `<i class="${k < i ? 'done' : k === i ? 'cur' : ''}"></i>`).join('')}</div>
+    <span class="roundstars"><span class="st">★</span> <b id="rgot">${got}</b></span></div>`;
+}
+
+function startRound(id) {
+  R = {id, g: GAMES[id], i: 0, got: 0, last: null};
+  nextQ();
+}
+function nextQ() {
+  if (!R) return;
+  if (R.i >= ROUND) return endRound(R.id, R.got);
+  let q, n = 0;
+  do q = R.g.make(); while (q.key === R.last && ++n < 12);
+  Object.assign(R, {q, last: q.key, first: true, answered: false, locked: false});
+  const sec = R.g.sec;
+  view().innerHTML = `<div class="play">
+    ${playTop(sec, R.i, ROUND, R.got)}
+    <div class="ask"><button class="speak btn3d emoji" data-act="speak" aria-label="${esc(t('repeat'))}">🔊</button><p class="qtext">${esc(q.text || [].concat(q.say).join(' '))}</p></div>
+    ${q.stage ? `<div class="stage">${q.stage}</div>` : ''}
+    <div class="opts ${q.layout || ''}">${q.opts.map((o, i) =>
+      `<button class="opt btn3d ${o.cls || ''}" data-act="opt" data-i="${i}" aria-label="${esc(o.aria)}">${o.html}</button>`).join('')}</div>
+  </div>`;
+  say(q.say, q.lang);
+}
+
+async function answer(btn) {
+  if (!R || R.locked || btn.classList.contains('bad')) return;
+  const q = R.q, o = q.opts[+btn.dataset.i], st = S.stats[R.g.sec], tok = R;
+  if (!R.answered) { st.a++; R.answered = true; }
+  if (o.val === q.ans) {
+    R.locked = true;
+    btn.classList.add('ok');
+    st.ok++;
+    if (R.first) st.c++;
+    const gain = STAR_OK + (R.first ? STAR_BONUS : 0);
+    R.got += gain;
+    addStars(gain, btn);
+    Sfx.play('ok'); confetti(btn);
+    const rg = $('#rgot'); if (rg) rg.textContent = R.got;
+    const dot = $$('.dots i')[R.i]; if (dot) dot.className = 'done';
+    await Promise.all([say([pick(T.praise[q.lang]), q.after], q.lang), wait(1800)]);
+    if (R !== tok) return;
+    await wait(300);
+    flushLevels();
+    await whenNoModal();
+    if (R !== tok) return;
+    R.i++;
+    nextQ();
+  } else {
+    R.first = false;
+    btn.classList.add('bad');
+    btn.setAttribute('aria-disabled', 'true');
+    const mk = R.id + '|' + q.key;
+    S.miss[mk] = (S.miss[mk] || 0) + 1;
+    save();
+    Sfx.play('bad');
+    say(t('tryAgain', null, q.lang), q.lang);
+  }
+}
+
+function endRound(id, got) {
+  const sec = GAMES[id].sec;
+  R = null; P = null;
+  view().innerHTML = `<div class="card endcard">
+    <div class="trophy emoji">🏆</div>
+    <h1>${t('roundDone')}</h1>
+    <p class="endstars">★ ${got}</p>
+    <p class="muted">${t('roundStars')}</p>
+    <div class="endbtns">
+      <button class="btn btn3d primary" data-act="again"><span class="emoji">🔁</span> ${t('again')}</button>
+      <button class="btn btn3d" data-act="go" data-to="${sec}"><span class="emoji">🎮</span> ${t('toGames')}</button>
+    </div></div>`;
+  Sfx.play('win'); confetti(null);
+  say(t('roundDone')).then(() => setTimeout(flushLevels, 200));
+}
+
+/* ---------- «Жұбын тап» ---------- */
+function startPairs() {
+  let six = shuffle(unlockedCountries()).slice(0, 6);
+  if (six.length < 6) six = six.concat(shuffle(COUNTRIES.filter(c => !six.includes(c))).slice(0, 6 - six.length));
+  P = {cards: shuffle([...six, ...six].map(c => c.id)), open: [], done: new Set(), lock: false, got: 0};
+  drawPairs();
+  say(t('g_pairs'));
+}
+function drawPairs() {
+  view().innerHTML = `<div class="play">
+    ${playTop('world', P.done.size / 2, 6, P.got)}
+    <div class="pgrid">${P.cards.map((id, i) => `<button class="pcard btn3d" data-act="card" data-i="${i}" aria-label="?">?</button>`).join('')}</div>
+  </div>`;
+}
+function showCard(i, open) {
+  const b = $(`.pcard[data-i="${i}"]`);
+  if (!b) return;
+  const c = country(P.cards[i]);
+  b.classList.toggle('open', open);
+  b.innerHTML = open ? flagSvg(c) : '?';
+  b.setAttribute('aria-label', open ? cname(c) : '?');
+}
+function flip(btn) {
+  if (!P || P.lock) return;
+  const i = +btn.dataset.i;
+  if (P.done.has(i) || P.open.includes(i)) return;
+  showCard(i, true);
+  P.open.push(i);
+  Sfx.play('flip');
+  if (P.open.length < 2) return;
+  const [a, b] = P.open;
+  P.open = [];
+  if (P.cards[a] === P.cards[b]) {
+    P.done.add(a); P.done.add(b);
+    [a, b].forEach(k => $(`.pcard[data-i="${k}"]`).classList.add('done'));
+    const st = S.stats.world; st.a++; st.c++; st.ok++;
+    P.got += STAR_PAIR;
+    addStars(STAR_PAIR, btn);
+    Sfx.play('ok'); confetti(btn);
+    $('#rgot').textContent = P.got;
+    $$('.dots i').forEach((d, k) => { d.className = k < P.done.size / 2 ? 'done' : k === P.done.size / 2 ? 'cur' : ''; });
+    say(cname(country(P.cards[a]), true));
+    const tok = P;
+    if (P.done.size === P.cards.length) setTimeout(() => { if (P === tok) endRound('pairs', P.got); }, 1800);
+    else setTimeout(flushLevels, 1400);
+  } else {
+    P.lock = true;
+    const tok = P;
+    setTimeout(() => { if (P !== tok) return; showCard(a, false); showCard(b, false); P.lock = false; }, 1000);
+  }
+}
+
+/* =====================================================================
+   ЭКРАНЫ
+   ===================================================================== */
+const view = () => $('#view');
+const ABC_ICON = {kk: 'Әә', ru: 'Аа', en: 'Aa'};
+
+function notesHtml() {
+  let h = '';
+  if (!Speech.ok && !AUDIO[S.lang]) h += `<div class="note"><span class="emoji">🔇</span><div>${t('noSpeech')}</div></div>`;
+  else if (Speech.ready && !Speech.hasKk && !AUDIO.kk && !S.voiceNoteHidden && (S.lang === 'kk' || S.abcLang === 'kk'))
+    h += `<div class="note"><span class="emoji">🗣️</span><div>${t('voiceKk')} ${t(isIOS() ? 'voiceTipIos' : 'voiceTipWin')}</div><button class="x" data-act="hideVoice" aria-label="${esc(t('close'))}">✕</button></div>`;
+  if (isIOS() && !isStandalone() && !S.installHidden)
+    h += `<div class="note"><span class="emoji">📲</span><div>${t('installShort')}</div><button class="btn btn3d primary" data-act="install">${t('how')}</button><button class="x" data-act="hideInstall" aria-label="${esc(t('close'))}">✕</button></div>`;
+  return h;
+}
+
+function renderHome() {
+  const lv = level(), inLevel = S.stars % PER_LEVEL;
+  const tiles = [['math', '<span class="tico rubik">123</span>'], ['abc', `<span class="tico rubik">${ABC_ICON[S.lang]}</span>`], ['world', '<span class="tico emoji">🌍</span>']];
+  view().innerHTML = `
+    <section class="hello">${SUN}<h1>${t('hello')}</h1></section>
+    <div class="notes" id="notes">${notesHtml()}</div>
+    <div class="tiles">${tiles.map(([id, ico]) => `
+      <button class="tile btn3d ${id}" data-act="go" data-to="${id}">${ico}<span class="tname">${t(id)}</span>
+        <span class="bar" role="progressbar" aria-valuenow="${pct(id)}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct(id)}%"></i></span></button>`).join('')}
+    </div>
+    <section class="card levelcard">
+      <div class="lvnum" aria-hidden="true">${lv}</div>
+      <div class="lvtext"><h2>${t('level')} ${lv}</h2><p class="muted">${t('toNext', {n: PER_LEVEL - inLevel})}</p>
+        <span class="bar light stars"><i style="width:${inLevel}%"></i></span></div>
+      <div class="medals">${S.medals.length ? S.medals.map(n => medalSvg(n)).join('') : `<p class="muted">🏅 ${t('noMedals')}</p>`}</div>
+    </section>
+    <button class="plink btn3d" data-act="go" data-to="parents"><span class="emoji">👨‍👩‍👧</span> ${t('parents')}</button>`;
+}
+
+function renderSection(sec) {
+  let extra = '';
+  if (sec === 'abc') extra = `<div class="seg" role="group" aria-label="${esc(t('alphabet'))}">${[['kk', 'Қазақша'], ['ru', 'Русский'], ['en', 'English']].map(([l, n]) =>
+    `<button class="segbtn" data-act="abc" data-l="${l}" aria-pressed="${S.abcLang === l}"><b class="rubik">${ABC_ICON[l]}</b>${n} <small>${ABC[l].length}</small></button>`).join('')}</div>`;
+  if (sec === 'world') {
+    const n = unlockedCountries().length;
+    extra = `<p class="info"><span class="emoji">🌍</span> ${t('opened', {n, m: COUNTRIES.length})}${n < COUNTRIES.length ? ` · ${t('locked')}` : ''}</p>`;
+  }
+  view().innerHTML = `
+    <div class="sechead"><button class="backbtn btn3d" data-act="go" data-to="" aria-label="${esc(t('home'))}">←</button><h1 class="${sec}-c">${t(sec)}</h1></div>
+    ${extra}
+    <div class="games">${SECTIONS[sec].map(id => `
+      <button class="gtile btn3d" data-act="go" data-to="${GAMES[id].route || 'play/' + id}">
+        <span class="gico ${sec}">${GAMES[id].icon}</span><span>${t('g_' + id)}</span></button>`).join('')}
+    </div>`;
+}
+
+function renderLearn(kind) {
+  if (kind === 'abc') {
+    const al = S.abcLang, list = ABC[al];
+    const seen = list.filter(e => S.seenLetters.includes(al + ':' + e[0])).length;
+    view().innerHTML = `
+      <div class="sechead"><button class="backbtn btn3d" data-act="go" data-to="abc" aria-label="${esc(t('back'))}">←</button><h1 class="abc-c">${t('g_learnAbc')}</h1></div>
+      <p class="counter muted">${t('learned', {n: seen, m: list.length})}</p>
+      <div class="lgrid">${list.map((e, i) => `<button class="lbtn btn3d ${S.seenLetters.includes(al + ':' + e[0]) ? 'seen' : ''}" data-act="letter" data-k="${i}" aria-label="${e[0]}">${e[0]}</button>`).join('')}</div>`;
+  } else {
+    const tier = worldTier();
+    const seen = COUNTRIES.filter(c => S.seenFlags.includes(c.id)).length;
+    view().innerHTML = `
+      <div class="sechead"><button class="backbtn btn3d" data-act="go" data-to="world" aria-label="${esc(t('back'))}">←</button><h1 class="world-c">${t('g_learnWorld')}</h1></div>
+      <p class="counter muted">${t('learned', {n: seen, m: COUNTRIES.length})}</p>
+      <div class="wgrid">${COUNTRIES.map(c => c.tier <= tier
+        ? `<button class="wbtn btn3d ${S.seenFlags.includes(c.id) ? 'seen' : ''}" data-act="country" data-k="${c.id}">${flagSvg(c)}<span>${esc(cname(c))}</span></button>`
+        : `<button class="wbtn btn3d locked" disabled aria-label="🔒">${flagSvg(c)}<span class="emoji">🔒</span></button>`).join('')}</div>`;
+  }
+}
+
+function openLetter(i, btn) {
+  const al = S.abcLang, e = ABC[al][i], [L, w, em] = e;
+  openModal(`<div class="bigletter rubik">${L}<small>${L.toLowerCase()}</small></div>
+    <div class="bigemoji emoji">${em}</div>
+    <div class="word">${wordHtml(e)}</div>
+    <button class="btn btn3d primary" data-act="sayCard"><span class="emoji">🔊</span></button>`);
+  modal.say = [`${L}, ${w}`, al];
+  say(`${L}, ${w}`, al);
+  const k = al + ':' + L;
+  if (!S.seenLetters.includes(k)) {
+    S.seenLetters.push(k);
+    addStars(STAR_SEEN, btn);
+    btn.classList.add('seen');
+    const seen = ABC[al].filter(x => S.seenLetters.includes(al + ':' + x[0])).length;
+    $('.counter').textContent = t('learned', {n: seen, m: ABC[al].length});
+  }
+}
+function openCountry(id, btn) {
+  const c = country(id), l = S.lang, [name, capital, fact] = c[l];
+  openModal(`${flagSvg(c, 'flagbig', true)}<h2>${esc(name)}</h2>
+    <p><span class="muted">${t('capital')}:</span> ${esc(capital)}</p>
+    <p class="fact">${esc(fact)}</p>
+    <button class="btn btn3d primary" data-act="sayCard"><span class="emoji">🔊</span></button>`);
+  const txt = t('card_country', {x: cname(c, true), c: capital, f: fact});
+  modal.say = [txt, l];
+  say(txt);
+  if (!S.seenFlags.includes(id)) {
+    S.seenFlags.push(id);
+    addStars(STAR_SEEN, btn);
+    btn.classList.add('seen');
+    $('.counter').textContent = t('learned', {n: COUNTRIES.filter(x => S.seenFlags.includes(x.id)).length, m: COUNTRIES.length});
+  }
+}
+
+function hardLabel(k) {
+  const [g, task] = k.split('|');
+  try { return `${t('g_' + g)}: ${GAMES[g].label(task)}`; } catch (e) { return k; }
+}
+function voiceRows() {
+  if (!Speech.ok && !Object.keys(AUDIO).length) return `<li><span>—</span><span>${t('p_noVoice')}</span></li>`;
+  if (!Speech.ready && !Object.keys(AUDIO).length) return `<li><span>…</span><span>${t('p_wait')}</span></li>`;
+  const names = {kk: 'Қазақша', ru: 'Русский', en: 'English'};
+  return LANGS.map(l => {
+    const v = Speech.voices[l];
+    const val = AUDIO[l] ? `🎙️ ${t('p_rec')}` : v ? esc(v.name) : (l === 'kk' && Speech.voices.ru ? `${t('p_noVoice')} — ${t('p_viaRu')}` : t('p_noVoice'));
+    return `<li><span>${names[l]}</span><span>${val}</span></li>`;
+  }).join('');
+}
+function renderParents() {
+  const hard = Object.entries(S.miss).sort((a, b) => b[1] - a[1]).slice(0, 8);
+  view().innerHTML = `
+    <div class="sechead"><button class="backbtn btn3d" data-act="go" data-to="" aria-label="${esc(t('home'))}">←</button><h1>${t('parents')}</h1></div>
+    <div class="sumgrid">
+      <div class="card sum"><b>★ ${S.stars}</b><span>${t('p_total')}</span></div>
+      <div class="card sum"><b>${level()}</b><span>${t('p_levelW')}</span></div>
+      <div class="card sum"><b>${S.medals.length}</b><span>${t('p_medalsW')}</span></div>
+    </div>
+    <div class="pcards">
+      <section class="card"><h2>${t('p_sections')}</h2>
+        <table class="ptable"><thead><tr><th>${t('p_section')}</th><th>${t('p_first')}</th><th>${t('p_all')}</th><th>${t('p_acc')}</th></tr></thead>
+        <tbody>${['math', 'abc', 'world'].map(s => { const st = S.stats[s]; return `<tr>
+          <td>${t(s)}<span class="bar light ${s}"><i style="width:${pct(s)}%"></i></span></td>
+          <td>${st.c}</td><td>${st.a}</td><td>${st.a ? Math.round(st.c / st.a * 100) + '%' : '—'}</td></tr>`; }).join('')}</tbody></table>
+      </section>
+      <section class="card"><h2>${t('p_hard')}</h2>
+        ${hard.length ? `<ul class="hard">${hard.map(([k, n]) => `<li><span>${esc(hardLabel(k))}</span><b>${t('p_times', {n})}</b></li>`).join('')}</ul>` : `<p class="muted">${t('p_noHard')}</p>`}
+      </section>
+      <section class="card"><h2>${t('p_voices')}</h2><ul class="voices" id="voiceList">${voiceRows()}</ul></section>
+      ${isIOS() ? `<section class="card"><h2><span class="emoji">📲</span> ${t('install')}</h2><ol class="steps">${t('installSteps').map(s => `<li>${s}</li>`).join('')}</ol></section>` : ''}
+      <section class="card"><p><span class="emoji">💡</span> ${t('p_tip')}</p></section>
+      <section class="card"><h2>${t('p_reset')}</h2><p class="muted" style="margin-bottom:14px">${t('p_storage')}</p>
+        <div id="resetBox"><button class="btn btn3d danger" data-act="reset">${t('p_reset')}</button></div></section>
+    </div>`;
+}
+
+/* =====================================================================
+   ШАПКА, ЯЗЫК, МАРШРУТЫ
+   ===================================================================== */
+let unlocked = false;   // звук разрешён (было первое касание)
+
+function updateHeader(bump) {
+  $('#starNum').textContent = S.stars;
+  $('#lvlPill').textContent = `${t('level')} ${level()}`;
+  $('#brandName').textContent = t('appName');
+  $('#gateTitle').textContent = t('appName');
+  $('#gateStart').textContent = t('start');
+  $$('.langs [data-l]').forEach(b => b.setAttribute('aria-pressed', b.dataset.l === S.lang));
+  const sb = $('#sndBtn');
+  sb.textContent = S.sound ? '🔊' : '🔇';
+  sb.setAttribute('aria-label', t('sound'));
+  sb.setAttribute('aria-pressed', S.sound);
+  $('.brand').setAttribute('aria-label', t('home'));
+  document.title = t('appName');
+  document.documentElement.lang = S.lang;
+  if (bump) { const s = $('#stars'); s.classList.remove('bump'); void s.offsetWidth; s.classList.add('bump'); }
+}
+
+function curSection() {
+  const [a, b] = location.hash.slice(1).split('/');
+  if (a === 'play' && GAMES[b]) return GAMES[b].sec;
+  if (a === 'learn') return b;
+  return null;
+}
+function setLang(l) {
+  if (!LANGS.includes(l)) return;
+  S.lang = l; S.abcLang = l;
+  save(); updateHeader();
+  const sec = curSection();
+  if (sec) go(sec); else route();
+}
+function go(h) {
+  if (location.hash.slice(1) === h) route();
+  else location.hash = h;
+}
+
+function stopAll() {
+  R = null; P = null;
+  stopSpeech();
+  if (modal && modal.kind !== 'level') closeModal(true);
+}
+function route() {
+  stopAll();
+  const [a, b] = decodeURIComponent(location.hash.slice(1)).split('/');
+  window.scrollTo(0, 0);
+  if (a === 'math' || a === 'abc' || a === 'world') { renderSection(a); say(t(a)); }
+  else if (a === 'play' && b === 'pairs') startPairs();
+  else if (a === 'play' && GAMES[b] && GAMES[b].make) startRound(b);
+  else if (a === 'learn' && (b === 'abc' || b === 'world')) { renderLearn(b); say(t(b === 'abc' ? 'g_learnAbc' : 'g_learnWorld')); }
+  else if (a === 'parents') renderParents();
+  else { renderHome(); say(t('hello')); }
+}
+function onVoicesReady() {
+  const n = $('#notes'); if (n) n.innerHTML = notesHtml();
+  const v = $('#voiceList'); if (v) v.innerHTML = voiceRows();
+}
+
+const ACTIONS = {
+  start() {
+    unlocked = true;
+    Sfx.unlock();
+    Speech.load();
+    try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
+    $('#gate').hidden = true;
+    route();
+  },
+  go: el => go(el.dataset.to),
+  lang: el => setLang(el.dataset.l),
+  sound() {
+    S.sound = !S.sound; save(); updateHeader();
+    if (!S.sound) stopSpeech();
+  },
+  speak: () => { if (R && R.q) say(R.q.say, R.q.lang); },
+  sayCard: () => { if (modal && modal.say) say(...modal.say); },
+  opt: el => answer(el),
+  card: el => flip(el),
+  again: () => route(),
+  close: () => closeModal(),
+  abc(el) { S.abcLang = el.dataset.l; save(); renderSection('abc'); },
+  letter: el => openLetter(+el.dataset.k, el),
+  country: el => openCountry(el.dataset.k, el),
+  hideVoice() { S.voiceNoteHidden = true; save(); $('#notes').innerHTML = notesHtml(); },
+  hideInstall() { S.installHidden = true; save(); $('#notes').innerHTML = notesHtml(); },
+  install() { openModal(`<div class="bigemoji emoji">📲</div><h2>${t('install')}</h2><ol class="steps">${t('installSteps').map(s => `<li>${s}</li>`).join('')}</ol><button class="btn btn3d primary" data-act="close">OK</button>`); },
+  reset() {
+    $('#resetBox').innerHTML = `<div class="confirm"><p>${t('p_resetQ')}</p>
+      <button class="btn btn3d danger" data-act="resetYes">${t('p_yes')}</button>
+      <button class="btn btn3d" data-act="resetNo">${t('p_no')}</button></div>`;
+  },
+  resetNo() { $('#resetBox').innerHTML = `<button class="btn btn3d danger" data-act="reset">${t('p_reset')}</button>`; },
+  resetYes() {
+    const keep = {lang: S.lang, abcLang: S.abcLang, sound: S.sound};
+    S = Object.assign(fresh(), keep);
+    levelQueue.length = 0;
+    save(); updateHeader();
+    renderParents();
+    $('#resetBox').innerHTML = `<p class="muted">✅ ${t('p_done')}</p>`;
+  }
+};
+
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-act]');
+  if (unlocked) Sfx.unlock();   // iOS может «усыпить» звук — будим на каждом касании
+  if (!el || el.disabled) return;
+  const fn = ACTIONS[el.dataset.act];
+  if (fn) fn(el, e);
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && modal) closeModal();
+  if ((e.key === 'Enter' || e.key === ' ') && !$('#gate').hidden && !e.target.closest('button')) { e.preventDefault(); ACTIONS.start(); }
+});
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) stopSpeech();
+  else if (unlocked) Sfx.unlock();
+});
+addEventListener('hashchange', route);
+addEventListener('resize', () => { const cv = $('#fx'); cv.width = 0; });
+
+/* ---------- Запуск ---------- */
+$('#logo').innerHTML = SUN;
+$('#gateSun').innerHTML = SUN;
+updateHeader();
+route();
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
+  addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+}
+</script>
+</body>
+</html>
